@@ -9,6 +9,8 @@ namespace StreetFighter.BusinessLogic
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using System.Windows;
+    using System.Windows.Media;
 
     /// <summary>
     /// Player class.
@@ -45,6 +47,21 @@ namespace StreetFighter.BusinessLogic
             this.FacinLeft = facingLeft;
             this.Invulnerable = false;
             this.Stunned = false;
+        }
+
+        static Geometry baseGeometry = new Rect
+
+        Geometry geometry;
+        public Geometry Geometry
+        {
+            get
+            {
+                return this.geometry;
+            }
+            set
+            {
+                this.geometry = value;
+            }
         }
 
         /// <summary>
