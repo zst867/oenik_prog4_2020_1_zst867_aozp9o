@@ -70,54 +70,6 @@ namespace StreetFighter.Repository
         }
 
         /// <summary>
-        /// Reads Player from savefile.
-        /// </summary>
-        /// <returns>XML.</returns>
-        /// <param name="id">Id of object to read.</param>
-        /// <param name="filename">Name of save file.</param>
-        public XDocument Read(int id, string filename)
-        {
-            StreamReader sr = new StreamReader(filename);
-            int counter = 0;
-            string ln;
-            int buffer = 0;
-
-            while (sr.ReadLine() != null)
-            {
-                ln = sr.ReadLine();
-                if (int.Parse(ln) == id)
-                {
-                    buffer = counter;
-                }
-
-                counter++;
-            }
-
-            sr.Close();
-
-            if (buffer != 0)
-            {
-                string[] lines = File.ReadAllLines(filename);
-                string[] resultLines = new string[10];
-                for (int i = buffer; i < lines.Length + 10; i++)
-                {
-                    resultLines[i - buffer] = lines[i];
-                }
-
-                string s = string.Empty;
-                for (int j = 0; j < resultLines.Length; j++)
-                {
-                    s += resultLines[0];
-                }
-
-                XDocument xd = new XDocument(s);
-                return xd;
-            }
-
-            return null;
-        }
-
-        /// <summary>
         /// Writes Player to save file.
         /// </summary>
         /// <param name="filename">Name of save file.</param>

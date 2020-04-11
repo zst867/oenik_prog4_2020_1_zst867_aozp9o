@@ -13,6 +13,9 @@ namespace StreetFighter.BusinessLogic
     using System.Xml.Linq;
     using StreetFighter.Repository;
 
+    /// <summary>
+    /// Class for handling save file.
+    /// </summary>
     public class LogicLoadGame : ILogicLoadGame
     {
         private readonly IRepositoryLoadGame loadGameRepo;
@@ -25,11 +28,22 @@ namespace StreetFighter.BusinessLogic
             this.loadGameRepo = new Repository();
         }
 
+        /// <summary>
+        /// Deletes game object in savefile.
+        /// </summary>
+        /// <param name="id">Id of saved game to delete.</param>
+        /// <param name="filename">Name of save file.</param>
         public void Delete(int id, string filename)
         {
             this.loadGameRepo.Delete(id, filename);
         }
 
+        /// <summary>
+        /// Loads game object from savefile.
+        /// </summary>
+        /// <param name="id">Id of saved game to load.</param>
+        /// <param name="filename">Name of save file.</param>
+        /// <returns>Game object (which is 2 Players object).</returns>
         public List<Player> Read(int id, string filename)
         {
             List<Player> players = new List<Player>();

@@ -23,14 +23,6 @@ namespace StreetFighter.Repository
         void Delete(int id, string filename);
 
         /// <summary>
-        /// Reads Player.
-        /// </summary>
-        /// <returns>XML.</returns>
-        /// <param name="id">Id of object to read.</param>
-        /// <param name="filename">Name of save file.</param>
-        XDocument Read(int id, string filename);
-
-        /// <summary>
         /// Gets all Player objects.
         /// </summary>
         /// <returns> XML.</returns>

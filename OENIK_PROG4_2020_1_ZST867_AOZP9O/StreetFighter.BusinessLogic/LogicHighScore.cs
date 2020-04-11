@@ -11,18 +11,26 @@ namespace StreetFighter.BusinessLogic
     using System.Xml.Linq;
     using StreetFighter.Repository;
 
+    /// <summary>
+    /// Class for calculating highscore.
+    /// </summary>
     public class LogicHighScore : ILogicHighScore
     {
         private readonly IRepositoryHighScore highScoreRepo;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="LogicSaveGame"/> class.
+        /// Initializes a new instance of the <see cref="LogicHighScore"/> class.
         /// </summary>
         public LogicHighScore()
         {
             this.highScoreRepo = new Repository();
         }
 
+        /// <summary>
+        /// Calculate Highscore.
+        /// </summary>
+        /// <returns> Player with highest score.</returns>
+        /// <param name="filename">Name of save file.</param>
         public Player CalculateHighscore(string filename)
         {
             XDocument xd = new XDocument(this.highScoreRepo.GetAll(filename));
