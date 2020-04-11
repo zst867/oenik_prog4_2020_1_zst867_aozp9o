@@ -25,6 +25,7 @@ namespace StreetFighter.BusinessLogic
         {
             this.saveGameRepo = new Repository();
         }
+
         /// <summary>
         /// Saves Player object to savefile.
         /// </summary>
@@ -34,7 +35,6 @@ namespace StreetFighter.BusinessLogic
         public void Write(Player a, Player b, string filename)
         {
             int ids = this.saveGameRepo.GetIds(filename);
-            Console.WriteLine(ids);
             var xd = new XElement(
                 "game",
                 new XAttribute("id", ids + 1),

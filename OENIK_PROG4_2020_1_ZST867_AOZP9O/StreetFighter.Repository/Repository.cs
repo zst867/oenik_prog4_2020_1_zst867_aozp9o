@@ -152,8 +152,7 @@ namespace StreetFighter.Repository
             if (xd.Element("saved_games").HasElements)
             {
                 int counter = xd
-                    .Descendants("saved_games")
-                    .Select(node => node.Element("game").Attribute("id"))
+                    .Descendants("game")
                     .Count();
                 return counter;
             }

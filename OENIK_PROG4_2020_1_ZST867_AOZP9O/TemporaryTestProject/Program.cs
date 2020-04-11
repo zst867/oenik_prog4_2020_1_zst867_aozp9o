@@ -37,9 +37,16 @@ namespace TemporaryTestProject
                 Stunned = false,
             };
 
-            LogicSaveGame lsg = new LogicSaveGame();
+            //LogicSaveGame lsg = new LogicSaveGame();
+            //lsg.Write(pa, pb, "test.txt");
 
-            lsg.Write(pa, pb, "test.txt");
+            LogicLoadGame lsg = new LogicLoadGame();
+            List<Player> players = lsg.Read(4,"test.txt");
+            foreach (var item in players)
+            {
+                Console.WriteLine(item.Score);
+            }
+
             Console.ReadLine();
         }
     }
