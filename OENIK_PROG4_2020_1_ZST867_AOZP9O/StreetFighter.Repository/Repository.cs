@@ -39,42 +39,34 @@ namespace StreetFighter.Repository
         /// <param name="filename">Name of save file.</param>
         public void Delete(int id, string filename)
         {
-            StreamReader sr = new StreamReader(filename);
-            int counter = 0;
-            string ln;
-            int buffer = 0;
+            XDocument xd = new XDocument(this.GetAll(filename));
+            const string quote = "\"";
 
-            while (sr.ReadLine() != null)
+            var q1 = from t in xd.Elements("saved_games").Elements("game")
+                     where int.Parse(t.Attribute("id").Value) == id
+                     select t;
+
+            foreach (XElement itemElement in q1)
             {
-                ln = sr.ReadLine();
-                if (int.Parse(ln) == id)
-                {
-                    buffer = counter;
-                }
-
-                counter++;
+                itemElement.Value = string.Empty;
             }
 
-            sr.Close();
+            xd.Save("test.txt");
+            string text = File.ReadAllText(filename);
+            StreamWriter sw0 = new StreamWriter(filename, false);
+            sw0.Write(text.Replace("<game id=" + quote + id + quote + "></game>", string.Empty));
+            sw0.Close();
+            XDocument xd2 = new XDocument(this.GetAll(filename));
+            var q2 = from t in xd2.Elements("saved_games").Elements("game")
+                     where int.Parse(t.Attribute("id").Value) > id
+                     select t;
 
-            if (buffer != 0)
+            foreach (XElement itemElement in q2)
             {
-                string[] lines = File.ReadAllLines(filename);
-                counter = 0;
-                for (int i = buffer; i < lines.Length + 10; i++)
-                {
-                    lines[i] = lines[i + 10];
-                }
-
-                StreamWriter sw = new StreamWriter(filename, false);
-                while (counter != lines.Length - 10)
-                {
-                    sw.WriteLine(lines[counter]);
-                    counter++;
-                }
-
-                sw.Close();
+                itemElement.Attribute("id").Value = (int.Parse(itemElement.Attribute("id").Value) - 1).ToString();
             }
+
+            xd2.Save("test.txt");
         }
 
         /// <summary>

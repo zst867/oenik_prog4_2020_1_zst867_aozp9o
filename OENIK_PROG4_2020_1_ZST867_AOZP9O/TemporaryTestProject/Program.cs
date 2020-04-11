@@ -31,24 +31,25 @@ namespace TemporaryTestProject
                 PositionY = 34,
                 Health = 10,
                 Stamina = 9,
-                Score = 4,
+                Score = 423,
                 FacinLeft = true,
                 Invulnerable = false,
                 Stunned = false,
             };
 
-            //LogicSaveGame lsg = new LogicSaveGame();
+            LogicSaveGame lsg = new LogicSaveGame();
             //lsg.Write(pa, pb, "test.txt");
 
-            //LogicLoadGame lsg = new LogicLoadGame();
+            LogicLoadGame lsgg = new LogicLoadGame();
+            lsgg.Delete(2, "test.txt");
             //List<Player> players = lsg.Read(4,"test.txt");
             //foreach (var item in players)
             //{
             //    Console.WriteLine(item.Score);
             //}
 
-            LogicHighScore lsg = new LogicHighScore();
-            Console.WriteLine(lsg.CalculateHighscore("test.txt").Score);
+            LogicHighScore lsgf = new LogicHighScore();
+            Console.WriteLine(lsgf.CalculateHighscore("test.txt").Score);
 
             Console.ReadLine();
         }
