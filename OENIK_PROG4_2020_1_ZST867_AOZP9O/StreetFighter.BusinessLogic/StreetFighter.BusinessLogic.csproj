@@ -53,6 +53,7 @@
     <Compile Include="Interfaces\ILogicHighScore.cs" />
     <Compile Include="Interfaces\ILogicLoadGame.cs" />
     <Compile Include="Interfaces\ILogicSaveGame.cs" />
+    <Compile Include="LogicHighScore.cs" />
     <Compile Include="LogicLoadGame.cs" />
     <Compile Include="LogicSaveGame.cs" />
     <Compile Include="Player.cs" />

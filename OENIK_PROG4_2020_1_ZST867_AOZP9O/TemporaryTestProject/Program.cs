@@ -40,12 +40,15 @@ namespace TemporaryTestProject
             //LogicSaveGame lsg = new LogicSaveGame();
             //lsg.Write(pa, pb, "test.txt");
 
-            LogicLoadGame lsg = new LogicLoadGame();
-            List<Player> players = lsg.Read(4,"test.txt");
-            foreach (var item in players)
-            {
-                Console.WriteLine(item.Score);
-            }
+            //LogicLoadGame lsg = new LogicLoadGame();
+            //List<Player> players = lsg.Read(4,"test.txt");
+            //foreach (var item in players)
+            //{
+            //    Console.WriteLine(item.Score);
+            //}
+
+            LogicHighScore lsg = new LogicHighScore();
+            Console.WriteLine(lsg.CalculateHighscore("test.txt").Score);
 
             Console.ReadLine();
         }

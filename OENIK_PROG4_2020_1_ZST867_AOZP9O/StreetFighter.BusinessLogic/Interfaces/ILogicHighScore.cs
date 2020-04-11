@@ -16,10 +16,10 @@ namespace StreetFighter.BusinessLogic
     public interface ILogicHighScore
     {
         /// <summary>
-        /// Gets all Player objects.
+        /// Calculate Highscore.
         /// </summary>
-        /// <returns> XML.</returns>
+        /// <returns> Player with highest score.</returns>
         /// <param name="filename">Name of save file.</param>
-        XDocument GetAll(string filename);
+        Player CalculateHighscore(string filename);
     }
 }
