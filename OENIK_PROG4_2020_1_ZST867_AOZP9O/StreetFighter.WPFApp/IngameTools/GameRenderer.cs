@@ -8,7 +8,7 @@ using System.Windows.Media;
 
 namespace StreetFighter.WPFApp.IngameTools
 {
-    class GameRenderer
+    public class GameRenderer
     {
         GameModel model;
         static Pen pen = new Pen(Brushes.Black, 2);
@@ -24,6 +24,7 @@ namespace StreetFighter.WPFApp.IngameTools
         public void DrawThings(DrawingContext ctx)
         {
             DrawingGroup dg = new DrawingGroup();
+            
 
             GeometryDrawing player1 = new GeometryDrawing(Brushes.Red, pen, this.model.Player1.Geometry);
             GeometryDrawing player2 = new GeometryDrawing(Brushes.DarkBlue, pen, this.model.Player2.Geometry);
@@ -34,7 +35,5 @@ namespace StreetFighter.WPFApp.IngameTools
 
             ctx.DrawDrawing(dg);
         }
-
-        
     }
 }

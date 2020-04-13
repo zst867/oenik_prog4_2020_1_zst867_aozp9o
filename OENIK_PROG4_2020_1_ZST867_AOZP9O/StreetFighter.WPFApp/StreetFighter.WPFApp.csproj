@@ -68,6 +68,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="IngameTools\GameControl.cs" />
     <Compile Include="IngameTools\GameModel.cs" />
     <Compile Include="IngameTools\GameRenderer.cs" />
     <Compile Include="MainWindow.xaml.cs">

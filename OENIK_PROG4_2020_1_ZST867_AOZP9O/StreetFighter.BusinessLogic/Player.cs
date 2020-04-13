@@ -48,7 +48,7 @@ namespace StreetFighter.BusinessLogic
             this.FacinLeft = facingLeft;
             this.Invulnerable = false;
             this.Stunned = false;
-            this.geometry = baseGeometry;
+            this.Geometry = baseGeometry;
         }
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace StreetFighter.BusinessLogic
 
         }
 
-        static Geometry baseGeometry; 
+        static Geometry baseGeometry;
 
         static Geometry facing_Left_Punch_Geometry;
 
@@ -104,12 +104,14 @@ namespace StreetFighter.BusinessLogic
         static Geometry facing_Right_Kick_Geometry;
 
         Geometry geometry;
+
         public Geometry Geometry
         {
             get
             {
-                return this.geometry;
+                return this.geometry; //.GetFlattenedPathGeometry();
             }
+
             set
             {
                 this.geometry = value;
