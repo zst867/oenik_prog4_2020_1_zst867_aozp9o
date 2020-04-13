@@ -67,7 +67,7 @@ namespace StreetFighter.BusinessLogic
                 ctx.PolyLineTo(punchPoints.ToList(), true, true);
             }
 
-            punchStream.Freeze();
+            //punchStream.Freeze();
 
             StreamGeometry rightPunchStream = punchStream.Clone();
             rightPunchStream.Transform = new ScaleTransform(-1, 1);
@@ -83,7 +83,7 @@ namespace StreetFighter.BusinessLogic
                 ctx.PolyLineTo(punchPoints.ToList(), true, true);
             }
 
-            kickStream.Freeze();
+            //kickStream.Freeze();
 
             StreamGeometry rightKickStream = kickStream.Clone();
             rightKickStream.Transform = new ScaleTransform(-1, 1);
