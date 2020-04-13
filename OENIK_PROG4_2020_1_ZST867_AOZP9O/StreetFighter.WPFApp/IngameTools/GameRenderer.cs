@@ -15,6 +15,8 @@ namespace StreetFighter.WPFApp.IngameTools
             this.model = model;
         }
 
+        //TODO: dicitionary az imagekhez
+
         public void DrawThings(DrawingContext ctx)
         {
             DrawingGroup dg = new DrawingGroup();

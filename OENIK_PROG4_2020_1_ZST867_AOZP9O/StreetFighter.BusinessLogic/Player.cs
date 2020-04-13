@@ -6,6 +6,7 @@ namespace StreetFighter.BusinessLogic
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
@@ -47,9 +48,60 @@ namespace StreetFighter.BusinessLogic
             this.FacinLeft = facingLeft;
             this.Invulnerable = false;
             this.Stunned = false;
+            this.geometry = baseGeometry;
         }
 
-        static Geometry baseGeometry = new Rect
+        /// <summary>
+        /// Initializes static members of the <see cref="Player"/> class.
+        /// Genarates the static geometries.
+        /// </summary>
+        static Player()
+        {
+            baseGeometry = new RectangleGeometry(new Rect(0, 0, 30, 100));
+
+            StreamGeometry punchStream = new StreamGeometry();
+            Point[] punchPoints = { new Point(0, 0), new Point(30, 0), new Point(30, 20), new Point(65, 20), new Point(65, 30), new Point(30, 30), new Point(30, 100), new Point(0, 100) };
+            using (StreamGeometryContext ctx = punchStream.Open())
+            {
+                ctx.BeginFigure(punchPoints[0], true, true);
+                ctx.PolyLineTo(punchPoints.ToList(), true, true);
+            }
+
+            punchStream.Freeze();
+
+            StreamGeometry rightPunchStream = punchStream.Clone();
+            rightPunchStream.Transform = new ScaleTransform(-1, 1);
+
+            facing_Right_Punch_Geometry = rightPunchStream;
+            facing_Left_Punch_Geometry = punchStream;
+
+            StreamGeometry kickStream = new StreamGeometry();
+            Point[] kickPoints = { new Point(0, 0), new Point(30, 0), new Point(30, 40), new Point(65, 20), new Point(65, 30), new Point(30, 50), new Point(30, 100), new Point(0, 100) };
+            using (StreamGeometryContext ctx = kickStream.Open())
+            {
+                ctx.BeginFigure(punchPoints[0], true, true);
+                ctx.PolyLineTo(punchPoints.ToList(), true, true);
+            }
+
+            kickStream.Freeze();
+
+            StreamGeometry rightKickStream = kickStream.Clone();
+            rightKickStream.Transform = new ScaleTransform(-1, 1);
+
+            facing_Right_Kick_Geometry = rightKickStream;
+            facing_Left_Kick_Geometry = kickStream;
+
+        }
+
+        static Geometry baseGeometry; 
+
+        static Geometry facing_Left_Punch_Geometry;
+
+        static Geometry facing_Left_Kick_Geometry;
+
+        static Geometry facing_Right_Punch_Geometry;
+
+        static Geometry facing_Right_Kick_Geometry;
 
         Geometry geometry;
         public Geometry Geometry
