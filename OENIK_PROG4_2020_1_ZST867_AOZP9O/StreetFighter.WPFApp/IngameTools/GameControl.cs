@@ -44,6 +44,7 @@ namespace StreetFighter.WPFApp.IngameTools
                 this.playerShapeTimer.Start();
             }
 
+            logic.RefreshScreen += (obj, args) => InvalidateVisual();
             InvalidateVisual();
         }
 

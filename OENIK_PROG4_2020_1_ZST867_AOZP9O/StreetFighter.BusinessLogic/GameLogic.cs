@@ -15,6 +15,8 @@ namespace StreetFighter.BusinessLogic
     /// </summary>
     public class GameLogic : IGameLogic
     {
+        public event EventHandler RefreshScreen;
+
         /// <summary>
         /// Blocking logic.
         /// </summary>
@@ -26,6 +28,7 @@ namespace StreetFighter.BusinessLogic
             if (this.EnoughStamina(a, staminacost * 2 ^ counter))
             {
                 a.Invulnerable = true;
+                RefreshScreen?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -51,12 +54,14 @@ namespace StreetFighter.BusinessLogic
             {
                 a.FacinLeft = false;
                 b.FacinLeft = true;
+                RefreshScreen?.Invoke(this, EventArgs.Empty);
             }
 
             if ((a.FacinLeft == false) && (a.PositionX < b.PositionX))
             {
                 a.FacinLeft = true;
                 b.FacinLeft = false;
+                RefreshScreen?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -73,6 +78,7 @@ namespace StreetFighter.BusinessLogic
             }
 
             a.Stamina -= 5;
+            RefreshScreen?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
@@ -93,6 +99,7 @@ namespace StreetFighter.BusinessLogic
         public void MoveLeft(Player a)
         {
             a.PositionX += 1;
+            RefreshScreen?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
@@ -102,6 +109,7 @@ namespace StreetFighter.BusinessLogic
         public void MoveRight(Player a)
         {
             a.PositionX -= 1;
+            RefreshScreen?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
@@ -113,6 +121,7 @@ namespace StreetFighter.BusinessLogic
         {
             a.PositionY += 1;
             this.JumpLogic(a, b);
+            RefreshScreen?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
@@ -128,6 +137,7 @@ namespace StreetFighter.BusinessLogic
             }
 
             a.Stamina -= 3;
+            RefreshScreen?.Invoke(this, EventArgs.Empty);
         }
     }
 }
