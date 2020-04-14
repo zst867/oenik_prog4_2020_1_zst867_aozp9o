@@ -32,8 +32,6 @@
                     Content="NEW GAME" FontWeight="ExtraBold" Margin="10" Padding="5" Background="White"/>
                 <Button Command="{Binding LoadGameCommand}"
                     Content="LOAD GAME" FontWeight="ExtraBold" Margin="10" Padding="5" Background="White"/>
-                <Button Command="{Binding OptionsCommand}"
-                    Content="OPTIONS" FontWeight="ExtraBold" Margin="10" Padding="5" Background="White"/>
                 <Button Command="{Binding CreditsCommand}"
                     Content="CREDITS" FontWeight="ExtraBold" Margin="10" Padding="5" Background="White"/>
                 <Button Command="{Binding HighScoreCommand}"

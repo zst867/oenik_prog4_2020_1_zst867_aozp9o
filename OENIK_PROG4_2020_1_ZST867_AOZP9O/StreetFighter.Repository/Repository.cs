@@ -35,9 +35,12 @@ namespace StreetFighter.Repository
         /// <summary>
         /// Deletes one Player.
         /// </summary>
+        /// <param name="name">Name of object to delete.</param>
         /// <param name="id">Id of object to delete.</param>
+        /// <param name="hour">Time of the saving (hours).</param>
+        /// <param name="minute">Time of the saving (minutes).</param>
         /// <param name="filename">Name of save file.</param>
-        public void Delete(int id, string filename)
+        public void Delete(string name, int id, int hour, int minute, string filename)
         {
             XDocument xd = new XDocument(this.GetAll(filename));
             const string quote = "\"";
@@ -54,7 +57,7 @@ namespace StreetFighter.Repository
             xd.Save("test.txt");
             string text = File.ReadAllText(filename);
             StreamWriter sw0 = new StreamWriter(filename, false);
-            sw0.Write(text.Replace("<game id=" + quote + id + quote + "></game>", string.Empty));
+            sw0.Write(text.Replace("<game id=" + quote + id + quote + " name=" + quote + name + quote + " hour=" + quote + hour + quote + " minute=" + quote + minute + quote + "></game>", string.Empty));
             sw0.Close();
             XDocument xd2 = new XDocument(this.GetAll(filename));
             var q2 = from t in xd2.Elements("saved_games").Elements("game")

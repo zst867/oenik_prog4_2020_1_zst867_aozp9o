@@ -73,11 +73,12 @@
     <Compile Include="CreditWindow.xaml.cs">
       <DependentUpon>CreditWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="LoadGameWindow.xaml.cs">
+      <DependentUpon>LoadGameWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Viewmodels\CreditViewModel.cs" />
     <Compile Include="Viewmodels\MainMenuViewModel.cs" />
-    <Compile Include="Window1.xaml.cs">
-      <DependentUpon>Window1.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Viewmodels\LoadGameViewModel.cs" />
     <Page Include="CreditWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -94,7 +95,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Window1.xaml">
+    <Page Include="LoadGameWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -125,6 +126,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\StreetFighter.BusinessLogic\StreetFighter.BusinessLogic.csproj">
+      <Project>{ff95c5ad-538c-4bf5-a145-5d3d4c87cb2a}</Project>
+      <Name>StreetFighter.BusinessLogic</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

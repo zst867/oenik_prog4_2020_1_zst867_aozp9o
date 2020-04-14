@@ -38,10 +38,10 @@ namespace TemporaryTestProject
             };
 
             LogicSaveGame lsg = new LogicSaveGame();
-            //lsg.Write(pa, pb, "test.txt");
+            //lsg.Write("asdasds", pa, pb, "test.txt");
 
             LogicLoadGame lsgg = new LogicLoadGame();
-            lsgg.Delete(2, "test.txt");
+            lsgg.Delete(2, "asdasds", 15, 50, "test.txt");
             //List<Player> players = lsg.Read(4,"test.txt");
             //foreach (var item in players)
             //{

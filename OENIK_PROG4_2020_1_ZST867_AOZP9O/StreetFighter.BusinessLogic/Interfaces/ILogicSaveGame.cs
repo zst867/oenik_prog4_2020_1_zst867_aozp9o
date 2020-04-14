@@ -18,9 +18,10 @@ namespace StreetFighter.BusinessLogic
         /// <summary>
         /// Saves Player object to savefile.
         /// </summary>
+        /// <param name="name">Name of Game object.</param>
         /// <param name="a">First Player object to save.</param>
         /// <param name="b">Second Player object to save.</param>
         /// <param name="filename">Name of save file.</param>
-        void Write(Player a, Player b, string filename);
+        void Write(string name, Player a, Player b, string filename);
     }
 }

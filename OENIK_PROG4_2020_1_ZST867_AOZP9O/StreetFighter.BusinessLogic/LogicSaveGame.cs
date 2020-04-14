@@ -29,15 +29,19 @@ namespace StreetFighter.BusinessLogic
         /// <summary>
         /// Saves Player object to savefile.
         /// </summary>
+        /// <param name="name">Name of Game object.</param>
         /// <param name="a">First Player object to save.</param>
         /// <param name="b">Second Player object to save.</param>
         /// <param name="filename">Name of save file.</param>
-        public void Write(Player a, Player b, string filename)
+        public void Write(string name, Player a, Player b, string filename)
         {
             int ids = this.saveGameRepo.GetIds(filename);
             var xd = new XElement(
                 "game",
                 new XAttribute("id", ids + 1),
+                new XAttribute("name", name),
+                new XAttribute("hour", DateTime.Now.Hour),
+                new XAttribute("minute", DateTime.Now.Minute),
                 new XElement(
                 "player1",
                 new XElement("name", a.Name),

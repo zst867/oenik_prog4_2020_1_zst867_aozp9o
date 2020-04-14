@@ -29,13 +29,16 @@ namespace StreetFighter.BusinessLogic
         }
 
         /// <summary>
-        /// Deletes game object in savefile.
+        /// Deletes Player.
         /// </summary>
-        /// <param name="id">Id of saved game to delete.</param>
+        /// <param name="id">Id of object to delete.</param>
+        /// <param name="name">Name of object to delete.</param>
+        /// <param name="hour">Time of the saving (hours).</param>
+        /// <param name="minute">Time of the saving (minutes).</param>
         /// <param name="filename">Name of save file.</param>
-        public void Delete(int id, string filename)
+        public void Delete(int id, string name, int hour, int minute, string filename)
         {
-            this.loadGameRepo.Delete(id, filename);
+            this.loadGameRepo.Delete(name, id, hour, minute, filename);
         }
 
         /// <summary>
@@ -80,6 +83,26 @@ namespace StreetFighter.BusinessLogic
                 }).FirstOrDefault());
 
             return players;
+        }
+
+        /// <summary>
+        /// Reads Game object from savefile.
+        /// </summary>
+        /// <returns>Two Players.</returns>
+        /// <param name="filename">Name of save file.</param>
+        public List<Game> ReadGame(string filename)
+        {
+            XDocument xd = new XDocument(this.loadGameRepo.GetAll(filename));
+
+            List<Game> games = xd.Descendants("player1")
+                .Select(node => new Game()
+                {
+                    Id = int.Parse(node.Parent.Attribute("id")?.Value),
+                    Name = node.Parent.Attribute("name")?.Value,
+                    Hour = int.Parse(node.Parent.Attribute("hour")?.Value),
+                    Minute = int.Parse(node.Parent.Attribute("minute")?.Value),
+                }).ToList();
+            return games;
         }
     }
 }

@@ -24,8 +24,7 @@ namespace WpfAppTemporary.Viewmodel
             {
             
             //-NewGameCommand = new RelayCommand(() => this.NewGame());
-            //LoadGameCommand = new RelayCommand(() => this.LoadGame());
-            //OptionsCommand = new RelayCommand(() => this.Options());
+                    LoadGameCommand = new RelayCommand(() => this.LoadGame());
                     CreditsCommand = new RelayCommand(() => this.Credits());
                 //HighScoreCommand = new RelayCommand(() => this.HighScore());
                     ExitGameCommand = new RelayCommand(() => this.ExitGame());
@@ -42,5 +41,11 @@ namespace WpfAppTemporary.Viewmodel
             {
             Application.Current.Shutdown();
             }
-        }   
+
+        private void LoadGame()
+        {
+            LoadGameWindow npw = new LoadGameWindow();
+            npw.Show();
+        }
+    }   
 }

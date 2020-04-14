@@ -11,17 +11,24 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WpfAppTemporary.ViewmodelSG;
 
 namespace WpfAppTemporary
 {
     /// <summary>
-    /// Interaction logic for Window1.xaml
+    /// Interaction logic for SaveGameWindow.xaml
     /// </summary>
-    public partial class Window1 : Window
+    public partial class LoadGameWindow : Window
     {
-        public Window1()
+        private LoadGameViewModel vm;
+
+        public LoadGameWindow()
         {
             InitializeComponent();
+            vm = FindResource("my_viewmodel3") as LoadGameViewModel;
+            if (vm.CloseAction == null)
+                vm.CloseAction = new Action(() => this.Close());
         }
+
     }
 }
