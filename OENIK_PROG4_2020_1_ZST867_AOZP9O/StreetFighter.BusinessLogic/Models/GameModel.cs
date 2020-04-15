@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StreetFighter.WPFApp.IngameTools
+namespace StreetFighter.BusinessLogic
 {
     public class GameModel
     {

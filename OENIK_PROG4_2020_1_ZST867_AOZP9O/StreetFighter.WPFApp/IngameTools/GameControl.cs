@@ -26,8 +26,8 @@ namespace StreetFighter.WPFApp.IngameTools
 
         private void GameControl_Loaded(object sender, RoutedEventArgs e)
         {
-            this.logic = new GameLogic();
             this.model = new GameModel();
+            this.logic = new GameLogic(this.model);
             this.renderer = new GameRenderer(this.model);
 
             Window win = Window.GetWindow(this);
@@ -58,7 +58,7 @@ namespace StreetFighter.WPFApp.IngameTools
                 case Key.Q: logic.Kick(model.Player1, model.Player2); break;
                 case Key.E: logic.Slap(model.Player1, model.Player2); break;
                 case Key.Space: logic.Block(model.Player1, 3); break;
-                case Key.Up: logic.MoveUp(model.Player1, model.Player2); break;
+                case Key.Up: logic.MoveUp(model.Player2, model.Player1); break;
                 case Key.Left: logic.MoveLeft(model.Player2); break; break;
                 case Key.Right: logic.MoveRight(model.Player2); break; break;
                 case Key.I: logic.Kick(model.Player2, model.Player1); break;
@@ -75,7 +75,8 @@ namespace StreetFighter.WPFApp.IngameTools
 
         private void jumpTick(object sender, EventArgs e)
         {
-            //TODO
+            logic.JumpTick();
+            InvalidateVisual();
         }
 
         protected override void OnRender(DrawingContext drawingContext)

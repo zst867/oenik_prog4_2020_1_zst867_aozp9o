@@ -156,7 +156,7 @@ namespace StreetFighter.BusinessLogic
             if (model.Player1.IsJumping)
             {
                 model.Player1.CY -= model.Player1.DY;
-                model.Player1.DY -= 2;
+                model.Player1.DY -= 1;
                 if (model.Player1.Geometry.Bounds.Bottom == 450)
                 {
                     model.Player1.IsJumping = false;
@@ -166,7 +166,7 @@ namespace StreetFighter.BusinessLogic
             if (model.Player2.IsJumping)
             {
                 model.Player2.CY -= model.Player2.DY;
-                model.Player2.DY -= 2;
+                model.Player2.DY -= 1;
                 if (model.Player2.Geometry.Bounds.Bottom == 450)
                 {
                     model.Player2.IsJumping = false;
