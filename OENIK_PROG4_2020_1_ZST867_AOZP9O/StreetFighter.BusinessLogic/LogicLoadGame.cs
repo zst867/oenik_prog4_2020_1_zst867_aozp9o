@@ -90,12 +90,12 @@ namespace StreetFighter.BusinessLogic
         /// </summary>
         /// <returns>Two Players.</returns>
         /// <param name="filename">Name of save file.</param>
-        public List<Game> ReadGame(string filename)
+        public List<SavedGame> ReadGame(string filename)
         {
             XDocument xd = new XDocument(this.loadGameRepo.GetAll(filename));
 
-            List<Game> games = xd.Descendants("player1")
-                .Select(node => new Game()
+            List<SavedGame> games = xd.Descendants("player1")
+                .Select(node => new SavedGame()
                 {
                     Id = int.Parse(node.Parent.Attribute("id")?.Value),
                     Name = node.Parent.Attribute("name")?.Value,

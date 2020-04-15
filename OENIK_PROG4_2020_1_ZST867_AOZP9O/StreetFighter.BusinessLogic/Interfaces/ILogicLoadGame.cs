@@ -38,6 +38,6 @@ namespace StreetFighter.BusinessLogic
         /// </summary>
         /// <returns>Two Players.</returns>
         /// <param name="filename">Name of save file.</param>
-        List<Game> ReadGame(string filename);
+        List<SavedGame> ReadGame(string filename);
     }
 }

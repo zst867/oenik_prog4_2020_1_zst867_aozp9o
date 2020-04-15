@@ -1,4 +1,4 @@
-﻿// <copyright file="Game.cs" company="PlaceholderCompany">
+﻿// <copyright file="SavedGame.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
@@ -19,12 +19,12 @@ namespace StreetFighter.BusinessLogic
     /// <summary>
     /// Game class.
     /// </summary>
-    public class Game : INotifyPropertyChanged
+    public class SavedGame : INotifyPropertyChanged
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Game"/> class. Empty.
         /// </summary>
-        public Game()
+        public SavedGame()
         {
         }
 
@@ -35,7 +35,7 @@ namespace StreetFighter.BusinessLogic
         /// <param name="name">Name of the Game object.</param>
         /// <param name="hour">Time of the saving (hours).</param>
         /// <param name="minute">Time of the saving (minutes).</param>
-        public Game(int id, string name, int hour, int minute)
+        public SavedGame(int id, string name, int hour, int minute)
         {
             this.Id = id;
             this.Name = name;

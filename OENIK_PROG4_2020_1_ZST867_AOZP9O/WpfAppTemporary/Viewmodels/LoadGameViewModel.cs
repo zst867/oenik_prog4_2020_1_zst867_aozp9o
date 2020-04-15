@@ -15,8 +15,8 @@ namespace WpfAppTemporary.ViewmodelSG
 {
     class LoadGameViewModel : ViewModelBase
     {
-        public ObservableCollection<Game> SavedGameCollection { get; set; }
-        public Game SelectedGame { get; set; }
+        public ObservableCollection<SavedGame> SavedGameCollection { get; set; }
+        public SavedGame SelectedGame { get; set; }
         public ICommand LoadSelectedCommand { get; private set; }
         public ICommand DeleteGameCommand { get; private set; }
 
@@ -31,7 +31,7 @@ namespace WpfAppTemporary.ViewmodelSG
         {
            
             ILogicLoadGame l = new LogicLoadGame();
-            SavedGameCollection = new ObservableCollection<Game>(l.ReadGame(filename));
+            SavedGameCollection = new ObservableCollection<SavedGame>(l.ReadGame(filename));
             DeleteGameCommand = new RelayCommand(() => this.Delete());
             LoadSelectedCommand = new RelayCommand(() => this.Load());
             closeCommand = new RelayCommand(() => this.Close());
@@ -42,7 +42,7 @@ namespace WpfAppTemporary.ViewmodelSG
             ILogicLoadGame log = new LogicLoadGame();
             int counter = 0;
             int counterfound=0;
-            foreach (Game g in SavedGameCollection)
+            foreach (SavedGame g in SavedGameCollection)
             {
                 counter++;
                 if (g == SelectedGame)
