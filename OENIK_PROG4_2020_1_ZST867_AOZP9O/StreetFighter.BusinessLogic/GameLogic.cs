@@ -17,6 +17,13 @@ namespace StreetFighter.BusinessLogic
     {
         public event EventHandler RefreshScreen;
 
+        GameModel model;
+
+        public GameLogic(GameModel model)
+        {
+            this.model = model;
+        }
+
         /// <summary>
         /// Blocking logic.
         /// </summary>
@@ -98,7 +105,7 @@ namespace StreetFighter.BusinessLogic
         /// <param name="a">Player object.</param>
         public void MoveLeft(Player a)
         {
-            a.CX += 1;
+            a.CX -= 30;
             RefreshScreen?.Invoke(this, EventArgs.Empty);
         }
 
@@ -108,7 +115,7 @@ namespace StreetFighter.BusinessLogic
         /// <param name="a">Player object.</param>
         public void MoveRight(Player a)
         {
-            a.CX -= 1;
+            a.CX += 30;
             RefreshScreen?.Invoke(this, EventArgs.Empty);
         }
 
@@ -119,9 +126,13 @@ namespace StreetFighter.BusinessLogic
         /// <param name="b">The other Player object for direction control.</param>
         public void MoveUp(Player a, Player b)
         {
-            a.CY += 1;
-            this.JumpLogic(a, b);
-            RefreshScreen?.Invoke(this, EventArgs.Empty);
+            if (!a.IsJumping)
+            {
+                a.DY = 20;
+                a.IsJumping = true;
+                this.JumpLogic(a, b);
+                //RefreshScreen?.Invoke(this, EventArgs.Empty);
+            }
         }
 
         /// <summary>
@@ -138,6 +149,29 @@ namespace StreetFighter.BusinessLogic
 
             a.Stamina -= 3;
             RefreshScreen?.Invoke(this, EventArgs.Empty);
+        }
+
+        public void JumpTick()
+        {
+            if (model.Player1.IsJumping)
+            {
+                model.Player1.CY -= model.Player1.DY;
+                model.Player1.DY -= 2;
+                if (model.Player1.Geometry.Bounds.Bottom == 450)
+                {
+                    model.Player1.IsJumping = false;
+                }
+            }
+
+            if (model.Player2.IsJumping)
+            {
+                model.Player2.CY -= model.Player2.DY;
+                model.Player2.DY -= 2;
+                if (model.Player2.Geometry.Bounds.Bottom == 450)
+                {
+                    model.Player2.IsJumping = false;
+                }
+            }
         }
     }
 }

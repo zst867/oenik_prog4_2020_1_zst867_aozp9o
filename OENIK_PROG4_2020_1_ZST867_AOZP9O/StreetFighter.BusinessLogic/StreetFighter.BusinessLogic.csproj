@@ -73,6 +73,7 @@
     <Compile Include="LogicHighScore.cs" />
     <Compile Include="LogicLoadGame.cs" />
     <Compile Include="LogicSaveGame.cs" />
+    <Compile Include="Models\GameModel.cs" />
     <Compile Include="Models\SavedGame.cs" />
     <Compile Include="Models\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
