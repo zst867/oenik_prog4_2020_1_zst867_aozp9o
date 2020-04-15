@@ -23,6 +23,7 @@ namespace StreetFighter.WPFApp
     {
         public MainWindow()
         {
+            InitializeComponent();
         }
     }
 }
