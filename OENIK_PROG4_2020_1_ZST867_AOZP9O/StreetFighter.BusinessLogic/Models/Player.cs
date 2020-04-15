@@ -43,6 +43,8 @@ namespace StreetFighter.BusinessLogic
             this.Name = name;
             this.CX = positionX;
             this.CY = positionY;
+            this.DY = 0;
+            this.IsJumping = false;
             this.Health = 10;
             this.Stamina = 10;
             this.Score = 0;
@@ -126,6 +128,10 @@ namespace StreetFighter.BusinessLogic
         /// Gets or sets the y-position of the Player object.
         /// </summary>
         public int CY { get; set; }
+
+        public int DY { get; set; }
+
+        public bool IsJumping { get; set; }
 
         /// <summary>
         /// Gets or sets the health of the Player object.

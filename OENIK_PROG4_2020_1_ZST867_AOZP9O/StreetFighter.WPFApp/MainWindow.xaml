@@ -6,7 +6,8 @@
         
         xmlns:local="clr-namespace:StreetFighter.WPFApp.IngameTools"
         mc:Ignorable="d"
-        Title="MainWindow" Height="477.799" Width="800">
-    <local:GameControl></local:GameControl>
+        Title="MainWindow" 
+        SizeToContent="WidthAndHeight" d:DesignWidth="799.651" d:DesignHeight="479.728">
+    <local:GameControl Width="800" Height="450"></local:GameControl>
     
 </Window>
