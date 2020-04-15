@@ -23,7 +23,7 @@
                     Content="Load Selected" FontWeight="ExtraBold" Margin="10" Padding="10" Background="White"/>
             <Button Command="{Binding DeleteGameCommand}"
                     Content="Delete Selected" FontWeight="ExtraBold" Margin="10" Padding="10" Background="White"/>
-            <Button Command="{Binding closeCommand}"
+            <Button Command="{Binding CloseCommand}"
                     Content="Back to Main Menu" FontWeight="ExtraBold" Margin="10" Padding="10" Background="White"/>
         </StackPanel>
 

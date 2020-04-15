@@ -26,7 +26,7 @@
             <Label Content="ZST867 - Hanula Benedek" FontWeight="ExtraBold" Margin="10" Padding="5" Background="LightGray" HorizontalContentAlignment="Center" FontSize="15"></Label>
             <Label Content="" FontWeight="ExtraBold" Margin="10" Padding="5" Background="LightGray" HorizontalContentAlignment="Center" FontSize="20"></Label>
             <Label Content="" FontWeight="ExtraBold" Margin="10" Padding="5" Background="LightGray" HorizontalContentAlignment="Center" FontSize="20"></Label>
-            <Button Command="{Binding closeCommand}"
+            <Button Command="{Binding CloseCommand}"
                     Content="BACK TO MAIN MENU" FontWeight="ExtraBold" Margin="15" Padding="10" Background="White"/>
         </StackPanel>
     </Grid>

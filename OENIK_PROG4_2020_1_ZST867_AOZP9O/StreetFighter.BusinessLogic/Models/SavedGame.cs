@@ -22,14 +22,19 @@ namespace StreetFighter.BusinessLogic
     public class SavedGame : INotifyPropertyChanged
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Game"/> class. Empty.
+        /// Gets or sets the Id of the Game object.
+        /// </summary>
+        private int id;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SavedGame"/> class. Empty.
         /// </summary>
         public SavedGame()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Game"/> class.
+        /// Initializes a new instance of the <see cref="SavedGame"/> class.
         /// </summary>
         /// <param name="id">Id of the Game object.</param>
         /// <param name="name">Name of the Game object.</param>
@@ -44,15 +49,19 @@ namespace StreetFighter.BusinessLogic
         }
 
         /// <summary>
-        /// Gets or sets the Id of the Game object.
+        /// Event for monitoring change in object.
         /// </summary>
-        private int id;
-
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /// <summary>
+        /// Gets or sets id of object.
+        /// </summary>
         public int Id
         {
-            get { return id; }
+            get
+            {
+                return this.id;
+            }
 
             set
             {
@@ -80,9 +89,9 @@ namespace StreetFighter.BusinessLogic
         {
             PropertyChangedEventHandler handler = this.PropertyChanged;
             if (handler != null)
+            {
                 handler(this, new PropertyChangedEventArgs(propertyName));
-
+            }
         }
-
     }
 }
