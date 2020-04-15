@@ -57,8 +57,8 @@ namespace StreetFighter.BusinessLogic
                 .Select(node => new Player()
                 {
                 Name = node.Element("name")?.Value,
-                PositionX = int.Parse(node.Element("posx")?.Value),
-                PositionY = int.Parse(node.Element("posy")?.Value),
+                CX = int.Parse(node.Element("posx")?.Value),
+                CY = int.Parse(node.Element("posy")?.Value),
                 Health = int.Parse(node.Element("health")?.Value),
                 Stamina = int.Parse(node.Element("stamina")?.Value),
                 Score = int.Parse(node.Element("score")?.Value),
@@ -72,8 +72,8 @@ namespace StreetFighter.BusinessLogic
                 .Select(node => new Player()
                 {
                     Name = node.Element("name")?.Value,
-                    PositionX = int.Parse(node.Element("posx")?.Value),
-                    PositionY = int.Parse(node.Element("posy")?.Value),
+                    CX = int.Parse(node.Element("posx")?.Value),
+                    CY = int.Parse(node.Element("posy")?.Value),
                     Health = int.Parse(node.Element("health")?.Value),
                     Stamina = int.Parse(node.Element("stamina")?.Value),
                     Score = int.Parse(node.Element("score")?.Value),

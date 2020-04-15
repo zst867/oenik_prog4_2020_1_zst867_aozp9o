@@ -50,14 +50,14 @@ namespace StreetFighter.BusinessLogic
         /// <param name="b">Other Player.</param>
         public void JumpLogic(Player a, Player b)
         {
-            if ((a.FacinLeft == true) && (a.PositionX > b.PositionX))
+            if ((a.FacinLeft == true) && (a.CX > b.CX))
             {
                 a.FacinLeft = false;
                 b.FacinLeft = true;
                 RefreshScreen?.Invoke(this, EventArgs.Empty);
             }
 
-            if ((a.FacinLeft == false) && (a.PositionX < b.PositionX))
+            if ((a.FacinLeft == false) && (a.CX < b.CX))
             {
                 a.FacinLeft = true;
                 b.FacinLeft = false;
@@ -88,7 +88,7 @@ namespace StreetFighter.BusinessLogic
         /// <param name="b">The other Player object for direction control.</param>
         public void MoveDown(Player a, Player b)
         {
-            a.PositionY -= 1;
+            a.CY -= 1;
             this.JumpLogic(a, b);
         }
 
@@ -98,7 +98,7 @@ namespace StreetFighter.BusinessLogic
         /// <param name="a">Player object.</param>
         public void MoveLeft(Player a)
         {
-            a.PositionX += 1;
+            a.CX += 1;
             RefreshScreen?.Invoke(this, EventArgs.Empty);
         }
 
@@ -108,7 +108,7 @@ namespace StreetFighter.BusinessLogic
         /// <param name="a">Player object.</param>
         public void MoveRight(Player a)
         {
-            a.PositionX -= 1;
+            a.CX -= 1;
             RefreshScreen?.Invoke(this, EventArgs.Empty);
         }
 
@@ -119,7 +119,7 @@ namespace StreetFighter.BusinessLogic
         /// <param name="b">The other Player object for direction control.</param>
         public void MoveUp(Player a, Player b)
         {
-            a.PositionY += 1;
+            a.CY += 1;
             this.JumpLogic(a, b);
             RefreshScreen?.Invoke(this, EventArgs.Empty);
         }

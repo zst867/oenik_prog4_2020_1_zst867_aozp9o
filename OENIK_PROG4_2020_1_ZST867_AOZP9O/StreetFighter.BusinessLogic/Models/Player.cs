@@ -41,8 +41,8 @@ namespace StreetFighter.BusinessLogic
         {
             this.MakeGeometries();
             this.Name = name;
-            this.PositionX = positionX;
-            this.PositionY = positionY;
+            this.CX = positionX;
+            this.CY = positionY;
             this.Health = 10;
             this.Stamina = 10;
             this.Score = 0;
@@ -101,14 +101,14 @@ namespace StreetFighter.BusinessLogic
         {
             get
             {
-                this.geometry.Transform = new TranslateTransform(this.PositionX, this.PositionY);
+                this.geometry.Transform = new TranslateTransform(this.CX, this.CY);
                 return this.geometry;
             }
 
             set
             {
                 this.geometry = value;
-                this.geometry.Transform = new TranslateTransform(this.PositionX, this.PositionY);
+                this.geometry.Transform = new TranslateTransform(this.CX, this.CY);
             }
         }
 
@@ -120,12 +120,12 @@ namespace StreetFighter.BusinessLogic
         /// <summary>
         /// Gets or sets the x-position of the Player object.
         /// </summary>
-        public int PositionX { get; set; }
+        public int CX { get; set; }
 
         /// <summary>
         /// Gets or sets the y-position of the Player object.
         /// </summary>
-        public int PositionY { get; set; }
+        public int CY { get; set; }
 
         /// <summary>
         /// Gets or sets the health of the Player object.

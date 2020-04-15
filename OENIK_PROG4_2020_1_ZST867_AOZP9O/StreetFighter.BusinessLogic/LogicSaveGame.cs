@@ -45,8 +45,8 @@ namespace StreetFighter.BusinessLogic
                 new XElement(
                 "player1",
                 new XElement("name", a.Name),
-                new XElement("posx", a.PositionX),
-                new XElement("posy", a.PositionY),
+                new XElement("posx", a.CX),
+                new XElement("posy", a.CY),
                 new XElement("health", a.Health),
                 new XElement("stamina", a.Stamina),
                 new XElement("score", a.Score),
@@ -56,8 +56,8 @@ namespace StreetFighter.BusinessLogic
                 new XElement(
                 "player2",
                 new XElement("name", b.Name),
-                new XElement("posx", b.PositionX),
-                new XElement("posy", b.PositionY),
+                new XElement("posx", b.CX),
+                new XElement("posy", b.CY),
                 new XElement("health", b.Health),
                 new XElement("stamina", b.Stamina),
                 new XElement("score", b.Score),
