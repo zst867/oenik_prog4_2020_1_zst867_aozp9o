@@ -19,7 +19,7 @@ namespace StreetFighter.BusinessLogic
     /// <summary>
     /// Game class.
     /// </summary>
-    public class Game : ObservableObject, INotifyPropertyChanged
+    public class Game : INotifyPropertyChanged
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Game"/> class. Empty.

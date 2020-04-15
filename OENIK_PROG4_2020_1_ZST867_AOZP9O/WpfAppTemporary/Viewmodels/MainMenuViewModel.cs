@@ -10,8 +10,8 @@ using System.Windows.Input;
 
 namespace WpfAppTemporary.Viewmodel
 {
-        class MainMenuViewModel : ViewModelBase
-        {
+    class MainMenuViewModel : ViewModelBase
+    {
             public ICommand NewGameCommand { get; private set; }
             public ICommand LoadGameCommand { get; private set; }
             public ICommand OptionsCommand { get; private set; }
@@ -23,15 +23,20 @@ namespace WpfAppTemporary.Viewmodel
             public MainMenuViewModel()
             {
             
-            //-NewGameCommand = new RelayCommand(() => this.NewGame());
+                    //NewGameCommand = new RelayCommand(() => this.NewGame());
                     LoadGameCommand = new RelayCommand(() => this.LoadGame());
                     CreditsCommand = new RelayCommand(() => this.Credits());
-                //HighScoreCommand = new RelayCommand(() => this.HighScore());
+                    HighScoreCommand = new RelayCommand(() => this.HighScore());
                     ExitGameCommand = new RelayCommand(() => this.ExitGame());
             }
 
+        private void HighScore()
+        {
+            HighScoreWindow hs = new HighScoreWindow();
+            hs.Show();
+        }
 
-            private void Credits()
+        private void Credits()
             {
             CreditWindow npw = new CreditWindow();
             npw.Show();

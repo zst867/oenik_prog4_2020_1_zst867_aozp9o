@@ -73,13 +73,21 @@
     <Compile Include="CreditWindow.xaml.cs">
       <DependentUpon>CreditWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="HighScoreWindow.xaml.cs">
+      <DependentUpon>HighScoreWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="LoadGameWindow.xaml.cs">
       <DependentUpon>LoadGameWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Viewmodels\CreditViewModel.cs" />
+    <Compile Include="Viewmodels\HighScoreViewModel.cs" />
     <Compile Include="Viewmodels\MainMenuViewModel.cs" />
     <Compile Include="Viewmodels\LoadGameViewModel.cs" />
     <Page Include="CreditWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="HighScoreWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

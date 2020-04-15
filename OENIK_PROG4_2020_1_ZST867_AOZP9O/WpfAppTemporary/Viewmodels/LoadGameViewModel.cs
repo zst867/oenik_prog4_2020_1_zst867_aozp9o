@@ -49,6 +49,10 @@ namespace WpfAppTemporary.ViewmodelSG
                 {
                     counterfound = counter;
                 }
+                if ((counterfound!=0) && (g != SelectedGame))
+                {
+                    g.Id--;
+                }
             }
 
             log.Delete(counterfound, SelectedGame.Name, SelectedGame.Hour, SelectedGame.Minute, filename);
