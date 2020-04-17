@@ -57,19 +57,23 @@ namespace StreetFighter.BusinessLogic
         /// <param name="b">Other Player.</param>
         public void JumpLogic(Player a, Player b)
         {
-            if ((a.FacinLeft == true) && (a.CX > b.CX))
-            {
-                a.FacinLeft = false;
-                b.FacinLeft = true;
-                //RefreshScreen?.Invoke(this, EventArgs.Empty);
-            }
+            //if (a.CX<b.CX)
+            //{
+            //    a.FacinLeft =
+            //}
+            //if ((a.FacinLeft == true) && (a.CX < b.CX))
+            //{
+            //    a.FacinLeft = false;
+            //    b.FacinLeft = true;
+            //    //RefreshScreen?.Invoke(this, EventArgs.Empty);
+            //}
 
-            if ((a.FacinLeft == false) && (a.CX < b.CX))
-            {
-                a.FacinLeft = true;
-                b.FacinLeft = false;
-                //RefreshScreen?.Invoke(this, EventArgs.Empty);
-            }
+            //if ((a.FacinLeft == false) && (a.CX > b.CX))
+            //{
+            //    a.FacinLeft = true;
+            //    b.FacinLeft = false;
+            //    //RefreshScreen?.Invoke(this, EventArgs.Empty);
+            //}
         }
 
         /// <summary>
@@ -132,7 +136,14 @@ namespace StreetFighter.BusinessLogic
         /// <param name="b">Player attacked.</param>
         public void Slap(Player a, Player b)
         {
-            a.Geometry = Player.facing_Left_Punch_Geometry;
+            if (a.FacinLeft)
+            {
+                a.Geometry = Player.facing_Left_Punch_Geometry;
+            }
+            else
+            {
+                a.Geometry = Player.facing_Right_Punch_Geometry;
+            }
             if (!b.Invulnerable)
             {
                 b.Health -= 1;
@@ -149,13 +160,21 @@ namespace StreetFighter.BusinessLogic
         /// <param name="b">Player attacked.</param>
         public void Kick(Player a, Player b)
         {
+            if (a.FacinLeft)
+            {
+                a.Geometry = Player.facing_Left_Kick_Geometry;
+            }
+            else
+            {
+                a.Geometry = Player.facing_Right_Kick_Geometry;
+            }
             if (!b.Invulnerable)
             {
                 b.Health -= 2;
             }
 
             a.Stamina -= 5;
-            a.Geometry = Player.facing_Left_Kick_Geometry;
+
             RefreshScreen?.Invoke(this, EventArgs.Empty);
         }
 
@@ -184,8 +203,19 @@ namespace StreetFighter.BusinessLogic
 
         public void ShapeTick()
         {
-            model.Player1.Geometry = Player.baseGeometry;
-            model.Player2.Geometry = Player.baseGeometry;
+            if (model.Player1.CX < model.Player2.CX)
+            {
+                model.Player1.FacinLeft = false;
+                model.Player2.FacinLeft = true;
+            }
+
+            else if (model.Player1.CX > model.Player2.CX)
+            {
+                model.Player1.FacinLeft = true;
+                model.Player2.FacinLeft = false;
+            }
+            model.Player1.Geometry = model.Player1.FacinLeft ? Player.facing_Left_BaseGeometry : Player.facing_Right_BaseGeometry;
+            model.Player2.Geometry = model.Player2.FacinLeft ? Player.facing_Left_BaseGeometry : Player.facing_Right_BaseGeometry;
         }
     }
 }

@@ -86,7 +86,7 @@ namespace StreetFighter.WPFApp.IngameTools
                             Thread.Sleep(10);
                         }
                         break;
-                } 
+                }
             }
         }
 
