@@ -61,31 +61,15 @@ namespace StreetFighter.BusinessLogic
             {
                 a.FacinLeft = false;
                 b.FacinLeft = true;
-                RefreshScreen?.Invoke(this, EventArgs.Empty);
+                //RefreshScreen?.Invoke(this, EventArgs.Empty);
             }
 
             if ((a.FacinLeft == false) && (a.CX < b.CX))
             {
                 a.FacinLeft = true;
                 b.FacinLeft = false;
-                RefreshScreen?.Invoke(this, EventArgs.Empty);
+                //RefreshScreen?.Invoke(this, EventArgs.Empty);
             }
-        }
-
-        /// <summary>
-        /// Kicking logic.
-        /// </summary>
-        /// <param name="a">Player attacking.</param>
-        /// <param name="b">Player attacked.</param>
-        public void Kick(Player a, Player b)
-        {
-            if (!b.Invulnerable)
-            {
-                b.Health -= 2;
-            }
-
-            a.Stamina -= 5;
-            RefreshScreen?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
@@ -105,8 +89,11 @@ namespace StreetFighter.BusinessLogic
         /// <param name="a">Player object.</param>
         public void MoveLeft(Player a)
         {
-            a.CX -= 30;
-            RefreshScreen?.Invoke(this, EventArgs.Empty);
+            if (a.Geometry.Bounds.Left > 8)
+            {
+                a.CX -= 30;
+                RefreshScreen?.Invoke(this, EventArgs.Empty);
+            }
         }
 
         /// <summary>
@@ -115,8 +102,11 @@ namespace StreetFighter.BusinessLogic
         /// <param name="a">Player object.</param>
         public void MoveRight(Player a)
         {
-            a.CX += 30;
-            RefreshScreen?.Invoke(this, EventArgs.Empty);
+            if (a.Geometry.Bounds.Right < model.width-5)
+            {
+                a.CX += 30;
+                RefreshScreen?.Invoke(this, EventArgs.Empty);
+            }
         }
 
         /// <summary>
@@ -142,12 +132,30 @@ namespace StreetFighter.BusinessLogic
         /// <param name="b">Player attacked.</param>
         public void Slap(Player a, Player b)
         {
+            a.Geometry = Player.facing_Left_Punch_Geometry;
             if (!b.Invulnerable)
             {
                 b.Health -= 1;
             }
 
             a.Stamina -= 3;
+            RefreshScreen?.Invoke(this, EventArgs.Empty);
+        }
+
+        /// <summary>
+        /// Kicking logic.
+        /// </summary>
+        /// <param name="a">Player attacking.</param>
+        /// <param name="b">Player attacked.</param>
+        public void Kick(Player a, Player b)
+        {
+            if (!b.Invulnerable)
+            {
+                b.Health -= 2;
+            }
+
+            a.Stamina -= 5;
+            a.Geometry = Player.facing_Left_Kick_Geometry;
             RefreshScreen?.Invoke(this, EventArgs.Empty);
         }
 
@@ -172,6 +180,12 @@ namespace StreetFighter.BusinessLogic
                     model.Player2.IsJumping = false;
                 }
             }
+        }
+
+        public void ShapeTick()
+        {
+            model.Player1.Geometry = Player.baseGeometry;
+            model.Player2.Geometry = Player.baseGeometry;
         }
     }
 }
