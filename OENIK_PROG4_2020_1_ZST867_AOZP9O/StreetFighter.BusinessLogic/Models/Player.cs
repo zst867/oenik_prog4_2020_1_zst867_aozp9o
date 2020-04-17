@@ -50,12 +50,15 @@ namespace StreetFighter.BusinessLogic
             this.FacinLeft = facingLeft;
             this.Invulnerable = false;
             this.Stunned = false;
-            this.Geometry = Player.baseGeometry;
+            this.Geometry = this.FacinLeft ? facing_Left_BaseGeometry : facing_Right_BaseGeometry;
         }
 
         static Player()
         {
-            baseGeometry = new RectangleGeometry(new Rect(0, 0, 30, 100));
+            facing_Right_BaseGeometry = new RectangleGeometry(new Rect(0, 0, 30, 100));
+            Geometry flg = facing_Right_BaseGeometry.Clone();
+            flg.Transform = new ScaleTransform(-1, 1);
+            facing_Left_BaseGeometry = flg.GetFlattenedPathGeometry();
 
             StreamGeometry punchStream = new StreamGeometry();
             Point[] punchPoints = { new Point(0, 0), new Point(30, 0), new Point(30, 20), new Point(65, 20), new Point(65, 30), new Point(30, 30), new Point(30, 100), new Point(0, 100) };
@@ -65,11 +68,11 @@ namespace StreetFighter.BusinessLogic
                 ctx.PolyLineTo(punchPoints.ToList(), true, true);
             }
 
-            StreamGeometry rightPunchStream = punchStream.Clone();
-            rightPunchStream.Transform = new ScaleTransform(-1, 1);
+            StreamGeometry leftPunchStream = punchStream.Clone();
+            leftPunchStream.Transform = new ScaleTransform(-1, 1);
 
-            facing_Right_Punch_Geometry = rightPunchStream;
-            facing_Left_Punch_Geometry = punchStream;
+            facing_Left_Punch_Geometry = leftPunchStream.GetFlattenedPathGeometry();
+            facing_Right_Punch_Geometry = punchStream;
 
             StreamGeometry kickStream = new StreamGeometry();
             Point[] kickPoints = { new Point(0, 0), new Point(30, 0), new Point(30, 40), new Point(65, 40), new Point(65, 50), new Point(30, 50), new Point(30, 100), new Point(0, 100) };
@@ -79,20 +82,22 @@ namespace StreetFighter.BusinessLogic
                 ctx.PolyLineTo(kickPoints.ToList(), true, true);
             }
 
-            StreamGeometry rightKickStream = kickStream.Clone();
-            rightKickStream.Transform = new ScaleTransform(-1, 1);
+            StreamGeometry leftKickStream = kickStream.Clone();
+            leftKickStream.Transform = new ScaleTransform(-1, 1);
 
-            facing_Right_Kick_Geometry = rightKickStream;
-            facing_Left_Kick_Geometry = kickStream;
+            facing_Left_Kick_Geometry = leftKickStream.GetFlattenedPathGeometry();
+            facing_Right_Kick_Geometry = kickStream;
         }
 
-        public static readonly Geometry baseGeometry;
+        public static readonly Geometry facing_Right_BaseGeometry;
 
-        public static Geometry facing_Left_Punch_Geometry;
+        public static Geometry facing_Left_BaseGeometry;
+
+        public static Geometry facing_Right_Punch_Geometry;
 
         public static Geometry facing_Left_Kick_Geometry;
 
-        public static Geometry facing_Right_Punch_Geometry;
+        public static Geometry facing_Left_Punch_Geometry;
 
         public static Geometry facing_Right_Kick_Geometry;
 
