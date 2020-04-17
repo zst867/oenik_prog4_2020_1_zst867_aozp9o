@@ -39,7 +39,6 @@ namespace StreetFighter.BusinessLogic
         /// <param name="Stunned">Determines whether the Player object is stunned.</param>
         public Player(string name, int positionX, int positionY, bool facingLeft)
         {
-            this.MakeGeometries();
             this.Name = name;
             this.CX = positionX;
             this.CY = positionY;
@@ -51,10 +50,10 @@ namespace StreetFighter.BusinessLogic
             this.FacinLeft = facingLeft;
             this.Invulnerable = false;
             this.Stunned = false;
-            this.Geometry = baseGeometry;
+            this.Geometry = Player.baseGeometry;
         }
 
-        private void MakeGeometries()
+        static Player()
         {
             baseGeometry = new RectangleGeometry(new Rect(0, 0, 30, 100));
 
@@ -73,11 +72,11 @@ namespace StreetFighter.BusinessLogic
             facing_Left_Punch_Geometry = punchStream;
 
             StreamGeometry kickStream = new StreamGeometry();
-            Point[] kickPoints = { new Point(0, 0), new Point(30, 0), new Point(30, 40), new Point(65, 20), new Point(65, 30), new Point(30, 50), new Point(30, 100), new Point(0, 100) };
+            Point[] kickPoints = { new Point(0, 0), new Point(30, 0), new Point(30, 40), new Point(65, 40), new Point(65, 50), new Point(30, 50), new Point(30, 100), new Point(0, 100) };
             using (StreamGeometryContext ctx = kickStream.Open())
             {
-                ctx.BeginFigure(punchPoints[0], true, true);
-                ctx.PolyLineTo(punchPoints.ToList(), true, true);
+                ctx.BeginFigure(kickPoints[0], true, true);
+                ctx.PolyLineTo(kickPoints.ToList(), true, true);
             }
 
             StreamGeometry rightKickStream = kickStream.Clone();
@@ -87,15 +86,15 @@ namespace StreetFighter.BusinessLogic
             facing_Left_Kick_Geometry = kickStream;
         }
 
-        Geometry baseGeometry;
+        public static readonly Geometry baseGeometry;
 
-        Geometry facing_Left_Punch_Geometry;
+        public static Geometry facing_Left_Punch_Geometry;
 
-        Geometry facing_Left_Kick_Geometry;
+        public static Geometry facing_Left_Kick_Geometry;
 
-        Geometry facing_Right_Punch_Geometry;
+        public static Geometry facing_Right_Punch_Geometry;
 
-        Geometry facing_Right_Kick_Geometry;
+        public static Geometry facing_Right_Kick_Geometry;
 
         Geometry geometry;
 
@@ -109,7 +108,7 @@ namespace StreetFighter.BusinessLogic
 
             set
             {
-                this.geometry = value;
+                this.geometry = value.Clone();
                 this.geometry.Transform = new TranslateTransform(this.CX, this.CY);
             }
         }
