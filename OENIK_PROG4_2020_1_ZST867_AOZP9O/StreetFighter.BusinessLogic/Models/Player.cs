@@ -166,5 +166,11 @@ namespace StreetFighter.BusinessLogic
         /// Gets or sets a value indicating whether the Player object is stunned.
         /// </summary>
         public bool Stunned { get; set; }
+
+        public bool IsHit(Player otherPlayer)
+        {
+            return Geometry.Combine(this.Geometry, otherPlayer.Geometry,
+                GeometryCombineMode.Intersect, null).GetArea() > 0;
+        }
     }
 }
