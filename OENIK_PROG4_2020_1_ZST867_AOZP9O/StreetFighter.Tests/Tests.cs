@@ -8,6 +8,7 @@ namespace StreetFighter.Tests
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using System.Xml.Linq;
     using Moq;
     using NUnit.Framework;
     using StreetFighter.BusinessLogic;
@@ -116,6 +117,49 @@ namespace StreetFighter.Tests
 
             Assert.AreEqual(logic.EnoughStamina(m.Player1, 1), true);
             Assert.AreEqual(logic.EnoughStamina(m.Player1, 11), false);
+        }
+
+        /// <summary>
+        /// Test.
+        /// </summary>
+        [Test]
+        public void TestThatHighScoreRepoWorksAndWasCalledOnce()
+        {
+            GameModel m = new GameModel();
+            var xd = new XDocument(new XElement(
+                "game",
+                new XAttribute("id", 1),
+                new XAttribute("name", "name"),
+                new XAttribute("hour", DateTime.Now.Hour),
+                new XAttribute("minute", DateTime.Now.Minute),
+                new XElement(
+                "player1",
+                new XElement("name", m.Player1.Name),
+                new XElement("posx", m.Player1.CX),
+                new XElement("posy", m.Player1.CY),
+                new XElement("health", m.Player1.Health),
+                new XElement("stamina", m.Player1.Stamina),
+                new XElement("score", m.Player1.Score + 1),
+                new XElement("invulnerable", m.Player1.Invulnerable),
+                new XElement("stunned", m.Player1.Stunned),
+                new XElement("fleft", m.Player1.FacinLeft)),
+                new XElement(
+                "player2",
+                new XElement("name", m.Player2.Name),
+                new XElement("posx", m.Player2.CX),
+                new XElement("posy", m.Player2.CY),
+                new XElement("health", m.Player2.Health),
+                new XElement("stamina", m.Player2.Stamina),
+                new XElement("score", m.Player2.Score + 2),
+                new XElement("invulnerable", m.Player2.Invulnerable),
+                new XElement("stunned", m.Player2.Stunned),
+                new XElement("fleft", m.Player2.FacinLeft))));
+            Mock<IRepositoryHighScore> mockInstance1 = new Mock<IRepositoryHighScore>();
+            mockInstance1.Setup(x => x.GetAll(It.IsAny<string>())).Returns(xd);
+            LogicHighScore logic = new LogicHighScore(mockInstance1.Object);
+            var i = logic.CalculateHighscore(It.IsAny<string>());
+            mockInstance1.Verify(x => x.GetAll(It.IsAny<string>()), Times.Once());
+            Assert.That(2, Is.EqualTo(i.Score));
         }
     }
 }
