@@ -20,7 +20,7 @@ namespace StreetFighter.WPFApp.IngameTools
         GameRenderer renderer;
         GameModel model;
         DispatcherTimer jumpTimer;
-        DispatcherTimer playerShapeTimer;
+        DispatcherTimer playerShapeAndStaminaTimer;
 
         public GameControl()
         {
@@ -39,12 +39,12 @@ namespace StreetFighter.WPFApp.IngameTools
                 this.jumpTimer = new DispatcherTimer();
                 this.jumpTimer.Interval = TimeSpan.FromMilliseconds(25);
                 this.jumpTimer.Tick += this.jumpTick;
-                this.playerShapeTimer = new DispatcherTimer();
-                this.playerShapeTimer.Interval = TimeSpan.FromMilliseconds(500);
-                this.playerShapeTimer.Tick += this.shapeTick;
+                this.playerShapeAndStaminaTimer = new DispatcherTimer();
+                this.playerShapeAndStaminaTimer.Interval = TimeSpan.FromMilliseconds(500);
+                this.playerShapeAndStaminaTimer.Tick += this.shapeTick;
                 win.KeyDown += this.Win_KeyDown;
                 this.jumpTimer.Start();
-                this.playerShapeTimer.Start();
+                this.playerShapeAndStaminaTimer.Start();
             }
 
             logic.RefreshScreen += (obj, args) => InvalidateVisual();
@@ -92,7 +92,7 @@ namespace StreetFighter.WPFApp.IngameTools
 
         private void shapeTick(object sender, EventArgs e)
         {
-            logic.ShapeTick();
+            logic.ShapeAndStaminaTick();
             InvalidateVisual();
         }
 

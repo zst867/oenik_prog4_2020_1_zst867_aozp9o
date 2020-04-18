@@ -141,22 +141,25 @@ namespace StreetFighter.BusinessLogic
         /// <param name="b">Player attacked.</param>
         public void Slap(Player a, Player b)
         {
-            if (a.FacinLeft)
+            if (a.Stamina >= 3)
             {
-                a.Geometry = Player.facing_Left_Punch_Geometry;
-            }
-            else
-            {
-                a.Geometry = Player.facing_Right_Punch_Geometry;
-            }
+                if (a.FacinLeft)
+                {
+                    a.Geometry = Player.facing_Left_Punch_Geometry;
+                }
+                else
+                {
+                    a.Geometry = Player.facing_Right_Punch_Geometry;
+                }
 
-            if (a.IsHit(b) && !b.Invulnerable)
-            {
-                b.Health -= 1;
-            }
+                if (a.IsHit(b) && !b.Invulnerable)
+                {
+                    b.Health -= 1;
+                }
 
-            a.Stamina -= 3;
-            RefreshScreen?.Invoke(this, EventArgs.Empty);
+                a.Stamina -= 3;
+                RefreshScreen?.Invoke(this, EventArgs.Empty);
+            }
         }
 
         /// <summary>
@@ -166,22 +169,38 @@ namespace StreetFighter.BusinessLogic
         /// <param name="b">Player attacked.</param>
         public void Kick(Player a, Player b)
         {
-            if (a.FacinLeft)
+            if (a.Stamina >= 5)
             {
-                a.Geometry = Player.facing_Left_Kick_Geometry;
-            }
-            else
-            {
-                a.Geometry = Player.facing_Right_Kick_Geometry;
-            }
-            if (a.IsHit(b) && !b.Invulnerable)
-            {
-                b.Health -= 2;
-            }
+                if (a.FacinLeft)
+                {
+                    a.Geometry = Player.facing_Left_Kick_Geometry;
+                }
+                else
+                {
+                    a.Geometry = Player.facing_Right_Kick_Geometry;
+                }
 
-            a.Stamina -= 5;
+                if (a.IsHit(b) && !b.Invulnerable)
+                {
+                    b.Health -= 2;
+                }
 
-            RefreshScreen?.Invoke(this, EventArgs.Empty);
+                a.Stamina -= 5;
+
+                RefreshScreen?.Invoke(this, EventArgs.Empty);
+            }
+        }
+
+        public void StaminaRegen()
+        {
+            if (model.Player1.Stamina < 10)
+            {
+                model.Player1.Stamina++;
+            }
+            if (model.Player2.Stamina < 10)
+            {
+                model.Player2.Stamina++;
+            }
         }
 
         public void JumpTick()
@@ -207,7 +226,7 @@ namespace StreetFighter.BusinessLogic
             }
         }
 
-        public void ShapeTick()
+        public void ShapeAndStaminaTick()
         {
             if (model.Player1.CX < model.Player2.CX)
             {
@@ -222,6 +241,7 @@ namespace StreetFighter.BusinessLogic
             }
             model.Player1.Geometry = model.Player1.FacinLeft ? Player.facing_Left_BaseGeometry : Player.facing_Right_BaseGeometry;
             model.Player2.Geometry = model.Player2.FacinLeft ? Player.facing_Left_BaseGeometry : Player.facing_Right_BaseGeometry;
+            StaminaRegen();
         }
     }
 }
