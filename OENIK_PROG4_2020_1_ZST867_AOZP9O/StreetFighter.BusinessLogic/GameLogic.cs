@@ -149,7 +149,8 @@ namespace StreetFighter.BusinessLogic
             {
                 a.Geometry = Player.facing_Right_Punch_Geometry;
             }
-            if (!b.Invulnerable)
+
+            if (a.IsHit(b) && !b.Invulnerable)
             {
                 b.Health -= 1;
             }
@@ -173,7 +174,7 @@ namespace StreetFighter.BusinessLogic
             {
                 a.Geometry = Player.facing_Right_Kick_Geometry;
             }
-            if (!b.Invulnerable)
+            if (a.IsHit(b) && !b.Invulnerable)
             {
                 b.Health -= 2;
             }
