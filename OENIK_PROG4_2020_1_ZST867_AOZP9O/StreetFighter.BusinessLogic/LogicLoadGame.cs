@@ -29,6 +29,17 @@ namespace StreetFighter.BusinessLogic
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="LogicLoadGame"/> class.
+        /// </summary>
+        /// <param name="repo">
+        /// Repository type.
+        /// </param>
+        public LogicLoadGame(IRepositoryLoadGame repo)
+        {
+            this.loadGameRepo = repo;
+        }
+
+        /// <summary>
         /// Deletes Player.
         /// </summary>
         /// <param name="id">Id of object to delete.</param>

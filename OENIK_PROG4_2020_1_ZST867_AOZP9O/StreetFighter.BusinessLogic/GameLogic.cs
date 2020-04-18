@@ -25,6 +25,10 @@ namespace StreetFighter.BusinessLogic
             this.model = model;
         }
 
+        public GameLogic()
+        {
+        }
+
         /// <summary>
         /// Blocking logic.
         /// </summary>
@@ -105,9 +109,9 @@ namespace StreetFighter.BusinessLogic
         /// Moves Player right.
         /// </summary>
         /// <param name="a">Player object.</param>
-        public void MoveRight(Player a, Player b)
+        public void MoveRight(Player a, Player b, GameModel model2)
         {
-            if ((a.FacinLeft || !a.IsHit(b)) && a.Geometry.Bounds.Right < model.width - 5)
+            if ((a.FacinLeft || !a.IsHit(b)) && a.Geometry.Bounds.Right < model2.width - 5)
             {
                 a.CX += 30;
                 RefreshScreen?.Invoke(this, EventArgs.Empty);

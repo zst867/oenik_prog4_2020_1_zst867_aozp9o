@@ -27,6 +27,17 @@ namespace StreetFighter.BusinessLogic
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="LogicSaveGame"/> class.
+        /// </summary>
+        /// <param name="repo">
+        /// Repository type.
+        /// </param>
+        public LogicSaveGame(IRepositorySaveGame repo)
+        {
+            this.saveGameRepo = repo;
+        }
+
+        /// <summary>
         /// Saves Player object to savefile.
         /// </summary>
         /// <param name="name">Name of Game object.</param>

@@ -27,6 +27,17 @@ namespace StreetFighter.BusinessLogic
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="LogicHighScore"/> class.
+        /// </summary>
+        /// <param name="repo">
+        /// Repository type.
+        /// </param>
+        public LogicHighScore(IRepositoryHighScore repo)
+        {
+            this.highScoreRepo = repo;
+        }
+
+        /// <summary>
         /// Calculate Highscore.
         /// </summary>
         /// <returns> Player with highest score.</returns>
