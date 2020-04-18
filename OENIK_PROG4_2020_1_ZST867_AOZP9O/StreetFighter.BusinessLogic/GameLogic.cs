@@ -9,6 +9,7 @@ namespace StreetFighter.BusinessLogic
     using System.Text;
     using System.Threading;
     using System.Threading.Tasks;
+    using System.Windows.Media;
 
     /// <summary>
     /// Game logic.
@@ -91,9 +92,9 @@ namespace StreetFighter.BusinessLogic
         /// Moves Player left.
         /// </summary>
         /// <param name="a">Player object.</param>
-        public void MoveLeft(Player a)
+        public void MoveLeft(Player a, Player b)
         {
-            if (a.Geometry.Bounds.Left > 8)
+            if ((!a.FacinLeft || !a.IsHit(b)) &&  a.Geometry.Bounds.Left > 8)
             {
                 a.CX -= 30;
                 RefreshScreen?.Invoke(this, EventArgs.Empty);
@@ -104,9 +105,9 @@ namespace StreetFighter.BusinessLogic
         /// Moves Player right.
         /// </summary>
         /// <param name="a">Player object.</param>
-        public void MoveRight(Player a)
+        public void MoveRight(Player a, Player b)
         {
-            if (a.Geometry.Bounds.Right < model.width-5)
+            if ((a.FacinLeft || !a.IsHit(b)) && a.Geometry.Bounds.Right < model.width - 5)
             {
                 a.CX += 30;
                 RefreshScreen?.Invoke(this, EventArgs.Empty);

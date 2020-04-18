@@ -18,13 +18,13 @@ namespace StreetFighter.BusinessLogic
         /// Moves Player left.
         /// </summary>
         /// <param name="a">Player object.</param>
-        void MoveLeft(Player a);
+        void MoveLeft(Player a, Player b);
 
         /// <summary>
         /// Moves Player right.
         /// </summary>
         /// <param name="a">Player object.</param>
-        void MoveRight(Player a);
+        void MoveRight(Player a, Player b);
 
         /// <summary>
         /// Moves Player up.

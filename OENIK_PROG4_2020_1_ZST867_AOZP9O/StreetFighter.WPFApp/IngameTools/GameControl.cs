@@ -56,14 +56,14 @@ namespace StreetFighter.WPFApp.IngameTools
             switch (e.Key)
             {
                 case Key.W: logic.MoveUp(model.Player1, model.Player2); break;
-                case Key.A: logic.MoveLeft(model.Player1); break;
-                case Key.D: logic.MoveRight(model.Player1); break;
+                case Key.A: logic.MoveLeft(model.Player1, model.Player2); break;
+                case Key.D: logic.MoveRight(model.Player1, model.Player2); break;
                 case Key.Q: logic.Kick(model.Player1, model.Player2); break;
                 case Key.E: logic.Slap(model.Player1, model.Player2); break;
                 case Key.Space: logic.Block(model.Player1, 3); break;
                 case Key.Up: logic.MoveUp(model.Player2, model.Player1); break;
-                case Key.Left: logic.MoveLeft(model.Player2); break; break;
-                case Key.Right: logic.MoveRight(model.Player2); break; break;
+                case Key.Left: logic.MoveLeft(model.Player2, model.Player1); break; break;
+                case Key.Right: logic.MoveRight(model.Player2, model.Player1); break; break;
                 case Key.I: logic.Kick(model.Player2, model.Player1); break;
                 case Key.O: logic.Slap(model.Player2, model.Player1); break;
                 case Key.P: logic.Block(model.Player2, 3); break;
