@@ -16,10 +16,13 @@ namespace StreetFighter.WPFApp.IngameTools
         Pen redPen = new Pen(Brushes.Red, 2);
         Pen bluePen = new Pen(Brushes.DarkBlue, 2);
         Pen yellowPen = new Pen(Brushes.Yellow, 2);
+        Pen greenPen = new Pen(Brushes.Green, 2);
         Point player1HealthLocation = new Point(20, 20);
         Point player2HealthLocation = new Point(240, 20);
         Point player1StaminaLocation = new Point(20, 40);
         Point player2StaminaLocation = new Point(240, 40);
+        Point player1ScoreLocation = new Point(20, 60);
+        Point player2ScoreLocation = new Point(240, 60);
         Typeface font = new Typeface("Arial");
 
         GeometryDrawing background;
@@ -84,6 +87,24 @@ namespace StreetFighter.WPFApp.IngameTools
               Brushes.Black);
             GeometryDrawing player2StaminaGD = new GeometryDrawing(null, yellowPen, player2StaminaText.BuildGeometry(player2StaminaLocation));
             dg.Children.Add(player2StaminaGD);
+
+            FormattedText player1ScoreText = new FormattedText(this.model.Player1.Score.ToString(),
+               System.Globalization.CultureInfo.CurrentCulture,
+               FlowDirection.LeftToRight,
+               this.font,
+               16,
+               Brushes.Black);
+            GeometryDrawing player1ScoreGD = new GeometryDrawing(null, greenPen, player1ScoreText.BuildGeometry(player1ScoreLocation));
+            dg.Children.Add(player1ScoreGD);
+
+            FormattedText player2ScoreText = new FormattedText(this.model.Player2.Score.ToString(),
+              System.Globalization.CultureInfo.CurrentCulture,
+              FlowDirection.LeftToRight,
+              this.font,
+              16,
+              Brushes.Black);
+            GeometryDrawing player2ScoreGD = new GeometryDrawing(null, greenPen, player2ScoreText.BuildGeometry(player2ScoreLocation));
+            dg.Children.Add(player2ScoreGD);
 
 #pragma warning restore CS0618 // Type or member is obsolete
         }

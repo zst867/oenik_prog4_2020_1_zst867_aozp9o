@@ -155,6 +155,7 @@ namespace StreetFighter.BusinessLogic
                 if (a.IsHit(b) && !b.Invulnerable)
                 {
                     b.Health -= 1;
+                    a.Score += a.Health * 9;
                 }
 
                 a.Stamina -= 3;
@@ -183,6 +184,7 @@ namespace StreetFighter.BusinessLogic
                 if (a.IsHit(b) && !b.Invulnerable)
                 {
                     b.Health -= 2;
+                    a.Score += a.Health * 10;
                 }
 
                 a.Stamina -= 5;

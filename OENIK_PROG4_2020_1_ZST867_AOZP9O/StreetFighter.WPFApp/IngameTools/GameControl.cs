@@ -58,8 +58,38 @@ namespace StreetFighter.WPFApp.IngameTools
                 case Key.W: logic.MoveUp(model.Player1, model.Player2); break;
                 case Key.A: logic.MoveLeft(model.Player1, model.Player2); break;
                 case Key.D: logic.MoveRight(model.Player1, model.Player2, model); break;
-                case Key.Q: logic.Kick(model.Player1, model.Player2); break;
-                case Key.E: logic.Slap(model.Player1, model.Player2); break;
+                case Key.Q: 
+                    {
+                        logic.Kick(model.Player1, model.Player2);
+                        if (model.Player1.Health <= 0)
+                        {
+                            MessageBox.Show(model.Player1.Name + " won");
+                            break;
+                        }
+
+                        if (model.Player2.Health <= 0)
+                        {
+                            MessageBox.Show(model.Player2.Name + " won");
+                            break;
+                        }
+                        break;
+                    } 
+                case Key.E:
+                    {
+                        logic.Slap(model.Player1, model.Player2);
+                        if (model.Player1.Health <= 0)
+                        {
+                            MessageBox.Show(model.Player1.Name + " won");
+                            break;
+                        }
+
+                        if (model.Player2.Health <= 0)
+                        {
+                            MessageBox.Show(model.Player2.Name + " won");
+                            break;
+                        }
+                        break;
+                    }
                 case Key.Space: logic.Block(model.Player1, 3); break;
                 case Key.Up: logic.MoveUp(model.Player2, model.Player1); break;
                 case Key.Left: logic.MoveLeft(model.Player2, model.Player1); break; break;
