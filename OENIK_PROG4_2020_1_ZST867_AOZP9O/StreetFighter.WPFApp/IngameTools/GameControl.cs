@@ -61,15 +61,11 @@ namespace StreetFighter.WPFApp.IngameTools
                 case Key.Q: 
                     {
                         logic.Kick(model.Player1, model.Player2);
-                        if (model.Player1.Health <= 0)
-                        {
-                            MessageBox.Show(model.Player1.Name + " won");
-                            break;
-                        }
-
                         if (model.Player2.Health <= 0)
                         {
-                            MessageBox.Show(model.Player2.Name + " won");
+                            ILogicSaveGame l = new LogicSaveGame();
+                            l.Write("autosave", model.Player1, model.Player2, "saved_games.txt");
+                            MessageBox.Show(model.Player1.Name + " won");
                             break;
                         }
                         break;
@@ -77,15 +73,12 @@ namespace StreetFighter.WPFApp.IngameTools
                 case Key.E:
                     {
                         logic.Slap(model.Player1, model.Player2);
-                        if (model.Player1.Health <= 0)
-                        {
-                            MessageBox.Show(model.Player1.Name + " won");
-                            break;
-                        }
-
+                        
                         if (model.Player2.Health <= 0)
                         {
-                            MessageBox.Show(model.Player2.Name + " won");
+                            ILogicSaveGame l = new LogicSaveGame();
+                            l.Write("autosave", model.Player1, model.Player2, "saved_games.txt");
+                            MessageBox.Show(model.Player1.Name + " won");
                             break;
                         }
                         break;
@@ -94,8 +87,31 @@ namespace StreetFighter.WPFApp.IngameTools
                 case Key.Up: logic.MoveUp(model.Player2, model.Player1); break;
                 case Key.Left: logic.MoveLeft(model.Player2, model.Player1); break; break;
                 case Key.Right: logic.MoveRight(model.Player2, model.Player1, model); break; break;
-                case Key.I: logic.Kick(model.Player2, model.Player1); break;
-                case Key.O: logic.Slap(model.Player2, model.Player1); break;
+                case Key.I:
+                    {
+                        logic.Kick(model.Player2, model.Player1);
+                        if (model.Player1.Health <= 0)
+                        {
+                            ILogicSaveGame l = new LogicSaveGame();
+                            l.Write("autosave", model.Player1, model.Player2, "saved_games.txt");
+                            MessageBox.Show(model.Player2.Name + " won");
+                            break;
+                        }
+                        break;
+                    };
+                case Key.O:
+                    {
+                        logic.Slap(model.Player2, model.Player1);
+
+                        if (model.Player1.Health <= 0)
+                        {
+                            ILogicSaveGame l = new LogicSaveGame();
+                            l.Write("autosave", model.Player1, model.Player2, "saved_games.txt");
+                            MessageBox.Show(model.Player2.Name + " won");
+                            break;
+                        }
+                        break;
+                    };
                 case Key.P: logic.Block(model.Player2, 3); break;
                 case Key.Escape: {
                         Thread t = new Thread(() => {
