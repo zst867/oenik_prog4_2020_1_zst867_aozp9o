@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29806.167
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreetFighter.Repository", "StreetFighter.Repository\StreetFighter.Repository.csproj", "{B406DB95-E5A7-42BE-A8F8-AEF55576908C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreetFighter.BusinessLogic", "StreetFighter.BusinessLogic\StreetFighter.BusinessLogic.csproj", "{FF95C5AD-538C-4BF5-A145-5D3D4C87CB2A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreetFighter.Tests", "StreetFighter.Tests\StreetFighter.Tests.csproj", "{159F77E2-C0F1-4E49-A979-2803B84544B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreetFighter.WPFApp", "StreetFighter.WPFApp\StreetFighter.WPFApp.csproj", "{09CF0B2F-26D6-40AE-AF00-D15385262998}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemporaryTestProject", "TemporaryTestProject\TemporaryTestProject.csproj", "{761C74C1-266E-4FB4-8F70-702BA6B8EEE7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfAppTemporary", "WpfAppTemporary\WpfAppTemporary.csproj", "{D5D9BAEF-A2E7-4082-8400-481A1F44115A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B406DB95-E5A7-42BE-A8F8-AEF55576908C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B406DB95-E5A7-42BE-A8F8-AEF55576908C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B406DB95-E5A7-42BE-A8F8-AEF55576908C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B406DB95-E5A7-42BE-A8F8-AEF55576908C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF95C5AD-538C-4BF5-A145-5D3D4C87CB2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF95C5AD-538C-4BF5-A145-5D3D4C87CB2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF95C5AD-538C-4BF5-A145-5D3D4C87CB2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF95C5AD-538C-4BF5-A145-5D3D4C87CB2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{159F77E2-C0F1-4E49-A979-2803B84544B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{159F77E2-C0F1-4E49-A979-2803B84544B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{159F77E2-C0F1-4E49-A979-2803B84544B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{159F77E2-C0F1-4E49-A979-2803B84544B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09CF0B2F-26D6-40AE-AF00-D15385262998}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09CF0B2F-26D6-40AE-AF00-D15385262998}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09CF0B2F-26D6-40AE-AF00-D15385262998}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09CF0B2F-26D6-40AE-AF00-D15385262998}.Release|Any CPU.Build.0 = Release|Any CPU
+		{761C74C1-266E-4FB4-8F70-702BA6B8EEE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{761C74C1-266E-4FB4-8F70-702BA6B8EEE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{761C74C1-266E-4FB4-8F70-702BA6B8EEE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{761C74C1-266E-4FB4-8F70-702BA6B8EEE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5D9BAEF-A2E7-4082-8400-481A1F44115A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5D9BAEF-A2E7-4082-8400-481A1F44115A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5D9BAEF-A2E7-4082-8400-481A1F44115A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5D9BAEF-A2E7-4082-8400-481A1F44115A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {14F471A7-785B-46A0-B162-729EDAF97425}
+	EndGlobalSection
+EndGlobal
