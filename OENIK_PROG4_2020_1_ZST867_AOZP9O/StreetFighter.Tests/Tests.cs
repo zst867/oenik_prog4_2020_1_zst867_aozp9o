@@ -87,7 +87,7 @@ namespace StreetFighter.Tests
 
             logic.Slap(m.Player1, m.Player2);
 
-            Assert.AreEqual(m.Player2.Health, 9);
+            Assert.AreEqual(m.Player2.Health, 10);
             Assert.AreEqual(m.Player1.Stamina, 7);
         }
 
@@ -102,7 +102,7 @@ namespace StreetFighter.Tests
 
             logic.Kick(m.Player1, m.Player2);
 
-            Assert.AreEqual(m.Player2.Health, 8);
+            Assert.AreEqual(m.Player2.Health, 10);
             Assert.AreEqual(m.Player1.Stamina, 5);
         }
 
@@ -160,6 +160,105 @@ namespace StreetFighter.Tests
             var i = logic.CalculateHighscore(It.IsAny<string>());
             mockInstance1.Verify(x => x.GetAll(It.IsAny<string>()), Times.Once());
             Assert.That(2, Is.EqualTo(i.Score));
+        }
+
+        /// <summary>
+        /// Test.
+        /// </summary>
+        // [Test]
+        // public void TestThatSaveGameRepoWasCalledOnce()
+        // {
+        //    Mock<IRepositorySaveGame> mockinstance = new Mock<IRepositorySaveGame>();
+        //    LogicSaveGame logic = new LogicSaveGame(mockinstance.Object);
+        //    mockinstance.Setup(x => x.GetIds(It.IsAny<string>())).Returns(It.IsAny<int>());
+        //    mockinstance.Setup(x => x.Write(It.IsAny<string>(), It.IsAny<string>())).Verifiable();
+        //    logic.Write(It.IsAny<string>(), It.IsAny<Player>(), It.IsAny<Player>(), It.IsAny<string>());
+        //    mockinstance.Verify(x => x.Write(It.IsAny<string>(), It.IsAny<string>()), Times.Once());
+        // }
+
+        /// <summary>
+        /// Test.
+        /// </summary>
+        [Test]
+        public void TestThatLoadGameReadWasCalledOnce()
+        {
+            GameModel m = new GameModel();
+            var xd = new XDocument(new XElement(
+                "game",
+                new XAttribute("id", 1),
+                new XAttribute("name", "name"),
+                new XAttribute("hour", DateTime.Now.Hour),
+                new XAttribute("minute", DateTime.Now.Minute),
+                new XElement(
+                "player1",
+                new XElement("name", m.Player1.Name),
+                new XElement("posx", m.Player1.CX),
+                new XElement("posy", m.Player1.CY),
+                new XElement("health", m.Player1.Health),
+                new XElement("stamina", m.Player1.Stamina),
+                new XElement("score", m.Player1.Score + 1),
+                new XElement("invulnerable", m.Player1.Invulnerable),
+                new XElement("stunned", m.Player1.Stunned),
+                new XElement("fleft", m.Player1.FacinLeft)),
+                new XElement(
+                "player2",
+                new XElement("name", m.Player2.Name),
+                new XElement("posx", m.Player2.CX),
+                new XElement("posy", m.Player2.CY),
+                new XElement("health", m.Player2.Health),
+                new XElement("stamina", m.Player2.Stamina),
+                new XElement("score", m.Player2.Score + 2),
+                new XElement("invulnerable", m.Player2.Invulnerable),
+                new XElement("stunned", m.Player2.Stunned),
+                new XElement("fleft", m.Player2.FacinLeft))));
+            Mock<IRepositoryLoadGame> mockinstance = new Mock<IRepositoryLoadGame>();
+            LogicLoadGame logic = new LogicLoadGame(mockinstance.Object);
+            mockinstance.Setup(x => x.GetAll(It.IsAny<string>())).Returns(xd);
+            logic.Read(It.IsAny<int>(), It.IsAny<string>());
+            mockinstance.Verify(x => x.GetAll(It.IsAny<string>()), Times.Once());
+        }
+
+        /// <summary>
+        /// Test.
+        /// </summary>
+        [Test]
+        public void TestThatLoadGameReadGameWasCalledOnceAndWorks()
+        {
+            GameModel m = new GameModel();
+            var xd = new XDocument(new XElement(
+                "game",
+                new XAttribute("id", 5),
+                new XAttribute("name", "name"),
+                new XAttribute("hour", DateTime.Now.Hour),
+                new XAttribute("minute", DateTime.Now.Minute),
+                new XElement(
+                "player1",
+                new XElement("name", m.Player1.Name),
+                new XElement("posx", m.Player1.CX),
+                new XElement("posy", m.Player1.CY),
+                new XElement("health", m.Player1.Health),
+                new XElement("stamina", m.Player1.Stamina),
+                new XElement("score", m.Player1.Score + 1),
+                new XElement("invulnerable", m.Player1.Invulnerable),
+                new XElement("stunned", m.Player1.Stunned),
+                new XElement("fleft", m.Player1.FacinLeft)),
+                new XElement(
+                "player2",
+                new XElement("name", m.Player2.Name),
+                new XElement("posx", m.Player2.CX),
+                new XElement("posy", m.Player2.CY),
+                new XElement("health", m.Player2.Health),
+                new XElement("stamina", m.Player2.Stamina),
+                new XElement("score", m.Player2.Score + 2),
+                new XElement("invulnerable", m.Player2.Invulnerable),
+                new XElement("stunned", m.Player2.Stunned),
+                new XElement("fleft", m.Player2.FacinLeft))));
+            Mock<IRepositoryLoadGame> mockinstance = new Mock<IRepositoryLoadGame>();
+            LogicLoadGame logic = new LogicLoadGame(mockinstance.Object);
+            mockinstance.Setup(x => x.GetAll(It.IsAny<string>())).Returns(xd);
+            var buffer = logic.ReadGame(It.IsAny<string>());
+            mockinstance.Verify(x => x.GetAll(It.IsAny<string>()), Times.Once());
+            Assert.AreEqual(buffer.FirstOrDefault().Id, 5);
         }
     }
 }
