@@ -165,16 +165,18 @@ namespace StreetFighter.Tests
         /// <summary>
         /// Test.
         /// </summary>
-        // [Test]
-        // public void TestThatSaveGameRepoWasCalledOnce()
-        // {
-        //    Mock<IRepositorySaveGame> mockinstance = new Mock<IRepositorySaveGame>();
-        //    LogicSaveGame logic = new LogicSaveGame(mockinstance.Object);
-        //    mockinstance.Setup(x => x.GetIds(It.IsAny<string>())).Returns(It.IsAny<int>());
-        //    mockinstance.Setup(x => x.Write(It.IsAny<string>(), It.IsAny<string>())).Verifiable();
-        //    logic.Write(It.IsAny<string>(), It.IsAny<Player>(), It.IsAny<Player>(), It.IsAny<string>());
-        //    mockinstance.Verify(x => x.Write(It.IsAny<string>(), It.IsAny<string>()), Times.Once());
-        // }
+        [Test]
+        public void TestThatSaveGameRepoWasCalledOnce()
+        {
+            GameModel m = new GameModel();
+            Mock<IRepositorySaveGame> mockinstance = new Mock<IRepositorySaveGame>();
+            LogicSaveGame logic = new LogicSaveGame(mockinstance.Object);
+
+            // mockinstance.Setup(x => x.GetIds(It.IsAny<string>())).Returns(It.IsAny<int>());
+            // mockinstance.Setup(x => x.Write(It.IsAny<string>(), It.IsAny<string>())).Verifiable();
+            logic.Write(string.Empty, m.Player1, m.Player2, string.Empty);
+            mockinstance.Verify(x => x.Write(It.IsAny<string>(), It.IsAny<string>()), Times.Once());
+        }
 
         /// <summary>
         /// Test.
