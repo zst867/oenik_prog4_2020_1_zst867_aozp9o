@@ -13,6 +13,8 @@ namespace StreetFighter.BusinessLogic
     using System.Windows;
     using System.Windows.Media;
 
+    public enum PlayerStatus { IsStanding, IsPunching, IsKicking }
+
     /// <summary>
     /// Player class.
     /// </summary>
@@ -50,18 +52,21 @@ namespace StreetFighter.BusinessLogic
             this.FacinLeft = facingLeft;
             this.Invulnerable = false;
             this.Stunned = false;
+            this.State = PlayerStatus.IsStanding;
+            this.Timer = 0;
             this.Geometry = this.FacinLeft ? facing_Left_BaseGeometry : facing_Right_BaseGeometry;
         }
 
         static Player()
         {
-            facing_Right_BaseGeometry = new RectangleGeometry(new Rect(0, 0, 30, 100));
+            facing_Right_BaseGeometry = new RectangleGeometry(new Rect(0, 0, 75, 225));
+            facing_Right_BaseGeometry.Transform = null;
             Geometry flg = facing_Right_BaseGeometry.Clone();
             flg.Transform = new ScaleTransform(-1, 1);
             facing_Left_BaseGeometry = flg.GetFlattenedPathGeometry();
 
             StreamGeometry punchStream = new StreamGeometry();
-            Point[] punchPoints = { new Point(0, 0), new Point(30, 0), new Point(30, 20), new Point(65, 20), new Point(65, 30), new Point(30, 30), new Point(30, 100), new Point(0, 100) };
+            Point[] punchPoints = { new Point(0, 0), new Point(75, 0), new Point(75, 30), new Point(120, 30), new Point(120, 60), new Point(75, 60), new Point(75, 225), new Point(0, 225) };
             using (StreamGeometryContext ctx = punchStream.Open())
             {
                 ctx.BeginFigure(punchPoints[0], true, true);
@@ -75,7 +80,7 @@ namespace StreetFighter.BusinessLogic
             facing_Right_Punch_Geometry = punchStream;
 
             StreamGeometry kickStream = new StreamGeometry();
-            Point[] kickPoints = { new Point(0, 0), new Point(30, 0), new Point(30, 40), new Point(65, 40), new Point(65, 50), new Point(30, 50), new Point(30, 100), new Point(0, 100) };
+            Point[] kickPoints = { new Point(0, 0), new Point(75, 0), new Point(75, 83), new Point(143, 83), new Point(143, 120), new Point(75, 120), new Point(75, 225), new Point(0, 225) };
             using (StreamGeometryContext ctx = kickStream.Open())
             {
                 ctx.BeginFigure(kickPoints[0], true, true);
@@ -89,7 +94,7 @@ namespace StreetFighter.BusinessLogic
             facing_Right_Kick_Geometry = kickStream;
         }
 
-        public static readonly Geometry facing_Right_BaseGeometry;
+        public static Geometry facing_Right_BaseGeometry;
 
         public static Geometry facing_Left_BaseGeometry;
 
@@ -115,6 +120,16 @@ namespace StreetFighter.BusinessLogic
             {
                 this.geometry = value.Clone();
                 this.geometry.Transform = new TranslateTransform(this.CX, this.CY);
+            }
+        }
+
+        public Geometry GetGeometryWithoutTransform
+        {
+            get
+            {
+                Geometry ret = geometry.Clone();
+                ret.Transform = new TranslateTransform(-CX, -CY);
+                return ret;
             }
         }
 
@@ -161,6 +176,10 @@ namespace StreetFighter.BusinessLogic
         /// Gets or sets a value indicating whether the Player object is invulnerable.
         /// </summary>
         public bool Invulnerable { get; set; }
+
+        public PlayerStatus State { get; set; }
+
+        public int Timer { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether the Player object is stunned.
