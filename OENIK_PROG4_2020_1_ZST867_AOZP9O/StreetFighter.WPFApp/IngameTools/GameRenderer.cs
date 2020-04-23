@@ -14,17 +14,17 @@ namespace StreetFighter.WPFApp.IngameTools
     public class GameRenderer
     {
         GameModel model;
-        Pen blackPen = new Pen(Brushes.Black, 2);
+        //Pen blackPen = new Pen(Brushes.Black, 2);
         Pen redPen = new Pen(Brushes.Red, 2);
         Pen bluePen = new Pen(Brushes.DarkBlue, 2);
         Pen yellowPen = new Pen(Brushes.Yellow, 2);
-        Pen greenPen = new Pen(Brushes.Green, 2);
-        Point player1HealthLocation = new Point(20, 20);
-        Point player2HealthLocation = new Point(240, 20);
-        Point player1StaminaLocation = new Point(20, 40);
-        Point player2StaminaLocation = new Point(240, 40);
-        Point player1ScoreLocation = new Point(20, 60);
-        Point player2ScoreLocation = new Point(240, 60);
+        Pen greenPen = new Pen(Brushes.GreenYellow, 2);
+        Point player1HealthLocation = new Point(270, 20);
+        Point player2HealthLocation = new Point(800, 20);
+        Point player1StaminaLocation = new Point(270, 50);
+        Point player2StaminaLocation = new Point(800, 50);
+        Point player1ScoreLocation = new Point(270, 75);
+        Point player2ScoreLocation = new Point(800, 75);
         Typeface font = new Typeface("Arial");
 
         GeometryDrawing background;
@@ -153,43 +153,43 @@ namespace StreetFighter.WPFApp.IngameTools
         private void DrawHealthAndStamina(ref DrawingGroup dg)
         {
 #pragma warning disable CS0618 // Type or member is obsolete
-            FormattedText player1HealthText = new FormattedText(this.model.Player1.Health.ToString()+"/10",
+            FormattedText player1HealthText = new FormattedText("Health: "+this.model.Player1.Health.ToString()+"/100",
                System.Globalization.CultureInfo.CurrentCulture,
                FlowDirection.LeftToRight,
                this.font,
-               16,
+               26,
                Brushes.Black);
             GeometryDrawing player1HealthGD = new GeometryDrawing(null, redPen, player1HealthText.BuildGeometry(player1HealthLocation));
             dg.Children.Add(player1HealthGD);
 
-            FormattedText player2HealthText = new FormattedText(this.model.Player2.Health.ToString() + "/10",
+            FormattedText player2HealthText = new FormattedText("Health: "+this.model.Player2.Health.ToString() + "/100",
              System.Globalization.CultureInfo.CurrentCulture,
              FlowDirection.LeftToRight,
              this.font,
-             16,
+             26,
              Brushes.Black);
             GeometryDrawing player2HealthGD = new GeometryDrawing(null, bluePen, player2HealthText.BuildGeometry(player2HealthLocation));
             dg.Children.Add(player2HealthGD);
 
-            FormattedText player1StaminaText = new FormattedText(this.model.Player1.Stamina.ToString() + "/10",
+            FormattedText player1StaminaText = new FormattedText("Stamina: "+this.model.Player1.Stamina.ToString() + "/100",
                System.Globalization.CultureInfo.CurrentCulture,
                FlowDirection.LeftToRight,
                this.font,
-               16,
+               20,
                Brushes.Black);
             GeometryDrawing player1StaminaGD = new GeometryDrawing(null, yellowPen, player1StaminaText.BuildGeometry(player1StaminaLocation));
             dg.Children.Add(player1StaminaGD);
 
-            FormattedText player2StaminaText = new FormattedText(this.model.Player2.Stamina.ToString() + "/10",
+            FormattedText player2StaminaText = new FormattedText("Stamina: "+this.model.Player2.Stamina.ToString() + "/100",
               System.Globalization.CultureInfo.CurrentCulture,
               FlowDirection.LeftToRight,
               this.font,
-              16,
+              20,
               Brushes.Black);
             GeometryDrawing player2StaminaGD = new GeometryDrawing(null, yellowPen, player2StaminaText.BuildGeometry(player2StaminaLocation));
             dg.Children.Add(player2StaminaGD);
 
-            FormattedText player1ScoreText = new FormattedText(this.model.Player1.Score.ToString(),
+            FormattedText player1ScoreText = new FormattedText("Score: "+this.model.Player1.Score.ToString(),
                System.Globalization.CultureInfo.CurrentCulture,
                FlowDirection.LeftToRight,
                this.font,
@@ -198,7 +198,7 @@ namespace StreetFighter.WPFApp.IngameTools
             GeometryDrawing player1ScoreGD = new GeometryDrawing(null, greenPen, player1ScoreText.BuildGeometry(player1ScoreLocation));
             dg.Children.Add(player1ScoreGD);
 
-            FormattedText player2ScoreText = new FormattedText(this.model.Player2.Score.ToString(),
+            FormattedText player2ScoreText = new FormattedText("Score: "+this.model.Player2.Score.ToString(),
               System.Globalization.CultureInfo.CurrentCulture,
               FlowDirection.LeftToRight,
               this.font,

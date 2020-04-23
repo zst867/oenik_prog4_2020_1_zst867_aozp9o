@@ -46,8 +46,8 @@ namespace StreetFighter.BusinessLogic
             this.CY = positionY;
             this.DY = 0;
             this.IsJumping = false;
-            this.Health = 10;
-            this.Stamina = 10;
+            this.Health = 100;
+            this.Stamina = 100;
             this.Score = 0;
             this.FacinLeft = facingLeft;
             this.Invulnerable = false;

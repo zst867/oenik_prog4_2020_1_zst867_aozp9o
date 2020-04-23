@@ -142,7 +142,7 @@ namespace StreetFighter.BusinessLogic
         public void Slap(Player a, Player b)
         {
 
-            if (a.Stamina >= 3)
+            if (a.Stamina >= 30)
             {
                 a.State = PlayerStatus.IsPunching;
                 a.Timer = 1;
@@ -157,11 +157,11 @@ namespace StreetFighter.BusinessLogic
 
                 if (a.IsHit(b) && !b.Invulnerable)
                 {
-                    b.Health -= 1;
+                    b.Health -= 10;
                     a.Score += a.Health * 9;
                 }
 
-                a.Stamina -= 3;
+                a.Stamina -= 30;
                 RefreshScreen?.Invoke(this, EventArgs.Empty);
             }
         }
@@ -173,7 +173,7 @@ namespace StreetFighter.BusinessLogic
         /// <param name="b">Player attacked.</param>
         public void Kick(Player a, Player b)
         {
-            if (a.Stamina >= 5)
+            if (a.Stamina >= 50)
             {
                 a.State = PlayerStatus.IsKicking;
                 a.Timer = 1;
@@ -188,11 +188,11 @@ namespace StreetFighter.BusinessLogic
 
                 if (a.IsHit(b) && !b.Invulnerable)
                 {
-                    b.Health -= 2;
+                    b.Health -= 20;
                     a.Score += a.Health * 10;
                 }
 
-                a.Stamina -= 5;
+                a.Stamina -= 50;
 
                 RefreshScreen?.Invoke(this, EventArgs.Empty);
             }
@@ -200,13 +200,13 @@ namespace StreetFighter.BusinessLogic
 
         public void StaminaRegen()
         {
-            if (model.Player1.Stamina < 10)
+            if (model.Player1.Stamina < 100)
             {
-                model.Player1.Stamina++;
+                model.Player1.Stamina+=5;
             }
-            if (model.Player2.Stamina < 10)
+            if (model.Player2.Stamina < 100)
             {
-                model.Player2.Stamina++;
+                model.Player2.Stamina+=5;
             }
         }
 
