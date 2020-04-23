@@ -210,5 +210,22 @@
       <Name>StreetFighter.BusinessLogic</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\Blue_L_Base.png" />
+    <EmbeddedResource Include="Images\Blue_L_Kick.png" />
+    <EmbeddedResource Include="Images\Blue_L_Punch.png" />
+    <EmbeddedResource Include="Images\Blue_R_Base.png" />
+    <EmbeddedResource Include="Images\Blue_R_Kick.png" />
+    <EmbeddedResource Include="Images\Blue_R_Punch.png" />
+    <EmbeddedResource Include="Images\Red_L_Base.png" />
+    <EmbeddedResource Include="Images\Red_L_Kick.png" />
+    <EmbeddedResource Include="Images\Red_L_Punch.png" />
+    <EmbeddedResource Include="Images\Red_R_Base.png" />
+    <EmbeddedResource Include="Images\Red_R_Kick.png" />
+    <EmbeddedResource Include="Images\Red_R_Punch.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\bigbg.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

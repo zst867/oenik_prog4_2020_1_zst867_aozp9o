@@ -40,7 +40,7 @@ namespace StreetFighter.WPFApp.IngameTools
                 this.jumpTimer.Interval = TimeSpan.FromMilliseconds(25);
                 this.jumpTimer.Tick += this.jumpTick;
                 this.playerShapeAndStaminaTimer = new DispatcherTimer();
-                this.playerShapeAndStaminaTimer.Interval = TimeSpan.FromMilliseconds(500);
+                this.playerShapeAndStaminaTimer.Interval = TimeSpan.FromMilliseconds(200);
                 this.playerShapeAndStaminaTimer.Tick += this.shapeTick;
                 win.KeyDown += this.Win_KeyDown;
                 this.jumpTimer.Start();
