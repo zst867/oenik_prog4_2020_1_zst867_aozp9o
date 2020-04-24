@@ -54,7 +54,7 @@ namespace StreetFighter.Repository
                 itemElement.Value = string.Empty;
             }
 
-            xd.Save("test.txt");
+            xd.Save("saved_games.txt");
             string text = File.ReadAllText(filename);
             StreamWriter sw0 = new StreamWriter(filename, false);
             sw0.Write(text.Replace("<game id=" + quote + id + quote + " name=" + quote + name + quote + " hour=" + quote + hour + quote + " minute=" + quote + minute + quote + "></game>", string.Empty));
@@ -69,7 +69,7 @@ namespace StreetFighter.Repository
                 itemElement.Attribute("id").Value = (int.Parse(itemElement.Attribute("id").Value) - 1).ToString();
             }
 
-            xd2.Save("test.txt");
+            xd2.Save("saved_games.txt");
         }
 
         /// <summary>

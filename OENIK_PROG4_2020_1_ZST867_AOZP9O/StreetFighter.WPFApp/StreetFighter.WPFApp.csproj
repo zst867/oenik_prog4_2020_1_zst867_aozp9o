@@ -137,14 +137,37 @@
     <Compile Include="CreditWindow.xaml.cs">
       <DependentUpon>CreditWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="HighScoreWindow.xaml.cs">
+      <DependentUpon>HighScoreWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PlayerNameWindow.xaml.cs">
+      <DependentUpon>PlayerNameWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SaveGameWindow.xaml.cs">
       <DependentUpon>SaveGameWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\CreditViewModel.cs" />
+    <Compile Include="ViewModels\HighScoreViewModel.cs" />
     <Compile Include="ViewModels\LoadGameViewModel.cs" />
+    <Compile Include="ViewModels\MainMenuViewModel.cs" />
     <Page Include="CreditWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="HighScoreWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PlayerNameWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SaveGameWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -154,7 +177,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="GameWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -167,8 +190,8 @@
     <Compile Include="LoadGameWindow.xaml.cs">
       <DependentUpon>LoadGameWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="GameWindow.xaml.cs">
+      <DependentUpon>GameWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -209,6 +232,23 @@
       <Project>{ff95c5ad-538c-4bf5-a145-5d3d4c87cb2a}</Project>
       <Name>StreetFighter.BusinessLogic</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\Blue_L_Base.png" />
+    <EmbeddedResource Include="Images\Blue_L_Kick.png" />
+    <EmbeddedResource Include="Images\Blue_L_Punch.png" />
+    <EmbeddedResource Include="Images\Blue_R_Base.png" />
+    <EmbeddedResource Include="Images\Blue_R_Kick.png" />
+    <EmbeddedResource Include="Images\Blue_R_Punch.png" />
+    <EmbeddedResource Include="Images\Red_L_Base.png" />
+    <EmbeddedResource Include="Images\Red_L_Kick.png" />
+    <EmbeddedResource Include="Images\Red_L_Punch.png" />
+    <EmbeddedResource Include="Images\Red_R_Base.png" />
+    <EmbeddedResource Include="Images\Red_R_Kick.png" />
+    <EmbeddedResource Include="Images\Red_R_Punch.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\bigbg.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

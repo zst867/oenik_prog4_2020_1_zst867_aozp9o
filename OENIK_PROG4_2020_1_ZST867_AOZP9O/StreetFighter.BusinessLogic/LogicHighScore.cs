@@ -52,12 +52,17 @@ namespace StreetFighter.BusinessLogic
                     Name = node.Element("name")?.Value,
                     CX = int.Parse(node.Element("posx")?.Value),
                     CY = int.Parse(node.Element("posy")?.Value),
+                    DY = int.Parse(node.Element("posd")?.Value),
+                    IsJumping = bool.Parse(node.Element("jump")?.Value),
                     Health = int.Parse(node.Element("health")?.Value),
                     Stamina = int.Parse(node.Element("stamina")?.Value),
                     Score = int.Parse(node.Element("score")?.Value),
                     Invulnerable = bool.Parse(node.Element("invulnerable")?.Value),
                     Stunned = bool.Parse(node.Element("stunned")?.Value),
+                    State = (PlayerStatus)Enum.Parse(typeof(PlayerStatus), node.Element("status")?.Value, true),
+                    Timer = int.Parse(node.Element("timer")?.Value),
                     FacinLeft = bool.Parse(node.Element("fleft")?.Value),
+                    Geometry = bool.Parse(node.Element("fleft")?.Value) ? Player.FacingLeftBaseGeometry : Player.FacingRightBaseGeometry,
                 }).ToList();
 
             List<Player> q2 = xd.Descendants("player2")
@@ -66,12 +71,17 @@ namespace StreetFighter.BusinessLogic
                Name = node.Element("name")?.Value,
                CX = int.Parse(node.Element("posx")?.Value),
                CY = int.Parse(node.Element("posy")?.Value),
+               DY = int.Parse(node.Element("posd")?.Value),
+               IsJumping = bool.Parse(node.Element("jump")?.Value),
                Health = int.Parse(node.Element("health")?.Value),
                Stamina = int.Parse(node.Element("stamina")?.Value),
                Score = int.Parse(node.Element("score")?.Value),
                Invulnerable = bool.Parse(node.Element("invulnerable")?.Value),
                Stunned = bool.Parse(node.Element("stunned")?.Value),
+               State = (PlayerStatus)Enum.Parse(typeof(PlayerStatus), node.Element("status")?.Value, true),
+               Timer = int.Parse(node.Element("timer")?.Value),
                FacinLeft = bool.Parse(node.Element("fleft")?.Value),
+               Geometry = bool.Parse(node.Element("fleft")?.Value) ? Player.FacingLeftBaseGeometry : Player.FacingRightBaseGeometry,
            }).ToList();
 
             return q1.Concat(q2).OrderByDescending(x => x.Score).FirstOrDefault();

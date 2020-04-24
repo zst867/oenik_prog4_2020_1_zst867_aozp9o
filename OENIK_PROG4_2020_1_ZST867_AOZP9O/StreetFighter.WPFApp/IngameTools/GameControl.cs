@@ -1,4 +1,5 @@
 ﻿using StreetFighter.BusinessLogic;
+using StreetFighter.WPFApp.Viewmodel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace StreetFighter.WPFApp.IngameTools
     {
         GameLogic logic;
         GameRenderer renderer;
-        GameModel model;
+        GameModel model = MainMenuViewModel.Gm;
         DispatcherTimer jumpTimer;
         DispatcherTimer playerShapeAndStaminaTimer;
 
@@ -29,7 +30,6 @@ namespace StreetFighter.WPFApp.IngameTools
 
         private void GameControl_Loaded(object sender, RoutedEventArgs e)
         {
-            this.model = new GameModel();
             this.logic = new GameLogic(this.model);
             this.renderer = new GameRenderer(this.model);
 
@@ -40,7 +40,7 @@ namespace StreetFighter.WPFApp.IngameTools
                 this.jumpTimer.Interval = TimeSpan.FromMilliseconds(25);
                 this.jumpTimer.Tick += this.jumpTick;
                 this.playerShapeAndStaminaTimer = new DispatcherTimer();
-                this.playerShapeAndStaminaTimer.Interval = TimeSpan.FromMilliseconds(500);
+                this.playerShapeAndStaminaTimer.Interval = TimeSpan.FromMilliseconds(200);
                 this.playerShapeAndStaminaTimer.Tick += this.shapeTick;
                 win.KeyDown += this.Win_KeyDown;
                 this.jumpTimer.Start();
@@ -58,15 +58,63 @@ namespace StreetFighter.WPFApp.IngameTools
                 case Key.W: logic.MoveUp(model.Player1, model.Player2); break;
                 case Key.A: logic.MoveLeft(model.Player1, model.Player2); break;
                 case Key.D: logic.MoveRight(model.Player1, model.Player2, model); break;
-                case Key.Q: logic.Kick(model.Player1, model.Player2); break;
-                case Key.E: logic.Slap(model.Player1, model.Player2); break;
-                case Key.Space: logic.Block(model.Player1, 3); break;
+                case Key.Q: 
+                    {
+                        logic.Kick(model.Player1, model.Player2);
+                        if (model.Player2.Health <= 0)
+                        {
+                            ILogicSaveGame l = new LogicSaveGame();
+                            l.Write("autosave", model.Player1, model.Player2, "saved_games.txt");
+                            MessageBox.Show(model.Player1.Name + " won");
+                            break;
+                        }
+                        break;
+                    } 
+                case Key.E:
+                    {
+                        logic.Slap(model.Player1, model.Player2);
+                        
+                        if (model.Player2.Health <= 0)
+                        {
+                            ILogicSaveGame l = new LogicSaveGame();
+                            l.Write("autosave", model.Player1, model.Player2, "saved_games.txt");
+                            MessageBox.Show(model.Player1.Name + " won");
+                            break;
+                        }
+                        break;
+                    }
+
+                // case Key.Space: logic.Block(model.Player1, 3); break;
                 case Key.Up: logic.MoveUp(model.Player2, model.Player1); break;
                 case Key.Left: logic.MoveLeft(model.Player2, model.Player1); break; break;
                 case Key.Right: logic.MoveRight(model.Player2, model.Player1, model); break; break;
-                case Key.I: logic.Kick(model.Player2, model.Player1); break;
-                case Key.O: logic.Slap(model.Player2, model.Player1); break;
-                case Key.P: logic.Block(model.Player2, 3); break;
+                case Key.I:
+                    {
+                        logic.Kick(model.Player2, model.Player1);
+                        if (model.Player1.Health <= 0)
+                        {
+                            ILogicSaveGame l = new LogicSaveGame();
+                            l.Write("autosave", model.Player1, model.Player2, "saved_games.txt");
+                            MessageBox.Show(model.Player2.Name + " won");
+                            break;
+                        }
+                        break;
+                    };
+                case Key.O:
+                    {
+                        logic.Slap(model.Player2, model.Player1);
+
+                        if (model.Player1.Health <= 0)
+                        {
+                            ILogicSaveGame l = new LogicSaveGame();
+                            l.Write("autosave", model.Player1, model.Player2, "saved_games.txt");
+                            MessageBox.Show(model.Player2.Name + " won");
+                            break;
+                        }
+                        break;
+                    };
+
+                // case Key.P: logic.Block(model.Player2, 3); break;
                 case Key.Escape: {
                         Thread t = new Thread(() => {
                             SaveGameWindow pw = new SaveGameWindow();

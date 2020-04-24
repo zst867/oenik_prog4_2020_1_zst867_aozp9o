@@ -1,4 +1,4 @@
-﻿// <copyright file="CreditWindow.xaml.cs" company="PlaceholderCompany">
+﻿// <copyright file="SaveGameWindow.xaml.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 namespace StreetFighter.WPFApp
@@ -16,26 +16,23 @@ namespace StreetFighter.WPFApp
     using System.Windows.Media;
     using System.Windows.Media.Imaging;
     using System.Windows.Shapes;
-    using StreetFighter.WPFApp.Viewmodels;
 
     /// <summary>
-    /// Interaction logic for Credits.xaml.
+    /// Interaction logic for LoadGameWindow.xaml.
     /// </summary>
-    public partial class CreditWindow : Window
+    public partial class PlayerNameWindow : Window
     {
-        private readonly CreditViewModel vm2;
-
         /// <summary>
-        /// Initializes a new instance of the <see cref="CreditWindow"/> class.
+        /// Initializes a new instance of the <see cref="PlayerNameWindow"/> class.
         /// </summary>
-        public CreditWindow()
+        public PlayerNameWindow()
         {
             this.InitializeComponent();
-            this.vm2 = this.FindResource("my_viewmodel2") as CreditViewModel;
-            if (this.vm2.CloseAction == null)
-            {
-                this.vm2.CloseAction = new Action(() => this.Close());
-            }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = true;
         }
     }
 }

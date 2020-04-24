@@ -15,6 +15,7 @@ namespace StreetFighter.WPFApp.ViewmodelSG
     using GalaSoft.MvvmLight;
     using GalaSoft.MvvmLight.CommandWpf;
     using StreetFighter.BusinessLogic;
+    using StreetFighter.WPFApp.Viewmodel;
 
     /// <summary>
     /// ViewModel for load game window.
@@ -28,12 +29,18 @@ namespace StreetFighter.WPFApp.ViewmodelSG
         /// </summary>
         public LoadGameViewModel()
         {
+            this.Gm = MainMenuViewModel.Gm;
             ILogicLoadGame l = new LogicLoadGame();
             this.SavedGameCollection = new ObservableCollection<SavedGame>(l.ReadGame(Filename));
             this.DeleteGameCommand = new RelayCommand(() => this.Delete());
-            this.LoadSelectedCommand = new RelayCommand(() => this.Load());
+            this.LoadSelectedCommand = new RelayCommand(() => this.Load(this.Gm));
             this.CloseCommand = new RelayCommand(() => this.Close());
         }
+
+        /// <summary>
+        /// Gets or sets GameModel.
+        /// </summary>
+        public GameModel Gm { get; set; }
 
         /// <summary>
         /// Gets or sets SavedGameCollection.
@@ -93,9 +100,14 @@ namespace StreetFighter.WPFApp.ViewmodelSG
             this.SavedGameCollection.Remove(this.SelectedGame);
         }
 
-        private void Load()
+        private void Load(GameModel gm)
         {
-            MessageBox.Show("not implemented");
+            ILogicLoadGame l = new LogicLoadGame();
+            List<Player> players = l.Read(this.SelectedGame.Id, Filename);
+            gm.Player1 = players.First();
+            gm.Player2 = players.Last();
+            gm.Modified = true;
+            this.CloseAction();
         }
 
         private void Close()
