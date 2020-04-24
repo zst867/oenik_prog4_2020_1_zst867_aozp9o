@@ -109,7 +109,7 @@ namespace StreetFighter.BusinessLogic
         /// Moves Player right.
         /// </summary>
         /// <param name="a">Player object.</param>
-        public void MoveRight(Player a, Player b, GameModel model2)
+        public void MoveRight(Player a, Player b, GameModel  model2)
         {
             if ((a.FacinLeft || !a.IsHit(b)) && a.Geometry.Bounds.Right < model2.Width - 5)
             {

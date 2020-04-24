@@ -31,7 +31,7 @@ namespace StreetFighter.Tests
 
             logic.MoveLeft(m.Player1, m.Player2);
 
-            Assert.AreEqual(m.Player1.CX, 70);
+            Assert.AreEqual(m.Player1.CX, 60);
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace StreetFighter.Tests
 
             logic.MoveRight(m.Player1, m.Player2, m);
 
-            Assert.AreEqual(m.Player1.CX, 130);
+            Assert.AreEqual(m.Player1.CX, 140);
         }
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace StreetFighter.Tests
 
             logic.MoveUp(m.Player1, m.Player2);
 
-            Assert.AreEqual(m.Player1.CY, 350);
+            Assert.AreEqual(m.Player1.CY, 375);
         }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace StreetFighter.Tests
 
             logic.MoveDown(m.Player1, m.Player2);
 
-            Assert.AreEqual(m.Player1.CY, 349);
+            Assert.AreEqual(m.Player1.CY, 374);
         }
 
         /// <summary>
@@ -87,8 +87,8 @@ namespace StreetFighter.Tests
 
             logic.Slap(m.Player1, m.Player2);
 
-            Assert.AreEqual(m.Player2.Health, 10);
-            Assert.AreEqual(m.Player1.Stamina, 7);
+            Assert.AreEqual(m.Player2.Health, 100);
+            Assert.AreEqual(m.Player1.Stamina, 70);
         }
 
         /// <summary>
@@ -102,8 +102,8 @@ namespace StreetFighter.Tests
 
             logic.Kick(m.Player1, m.Player2);
 
-            Assert.AreEqual(m.Player2.Health, 10);
-            Assert.AreEqual(m.Player1.Stamina, 5);
+            Assert.AreEqual(m.Player2.Health, 100);
+            Assert.AreEqual(m.Player1.Stamina, 50);
         }
 
         /// <summary>
@@ -116,7 +116,7 @@ namespace StreetFighter.Tests
             IGameLogic logic = new GameLogic();
 
             Assert.AreEqual(logic.EnoughStamina(m.Player1, 1), true);
-            Assert.AreEqual(logic.EnoughStamina(m.Player1, 11), false);
+            Assert.AreEqual(logic.EnoughStamina(m.Player1, 101), false);
         }
 
         /// <summary>
@@ -137,22 +137,30 @@ namespace StreetFighter.Tests
                 new XElement("name", m.Player1.Name),
                 new XElement("posx", m.Player1.CX),
                 new XElement("posy", m.Player1.CY),
+                new XElement("posd", m.Player1.DY),
+                new XElement("jump", m.Player1.IsJumping),
                 new XElement("health", m.Player1.Health),
                 new XElement("stamina", m.Player1.Stamina),
-                new XElement("score", m.Player1.Score + 1),
+                new XElement("score", m.Player1.Score),
                 new XElement("invulnerable", m.Player1.Invulnerable),
                 new XElement("stunned", m.Player1.Stunned),
+                new XElement("status", m.Player1.State),
+                new XElement("timer", m.Player1.Timer),
                 new XElement("fleft", m.Player1.FacinLeft)),
                 new XElement(
                 "player2",
                 new XElement("name", m.Player2.Name),
                 new XElement("posx", m.Player2.CX),
                 new XElement("posy", m.Player2.CY),
+                new XElement("posd", m.Player2.DY),
+                new XElement("jump", m.Player2.IsJumping),
                 new XElement("health", m.Player2.Health),
                 new XElement("stamina", m.Player2.Stamina),
                 new XElement("score", m.Player2.Score + 2),
                 new XElement("invulnerable", m.Player2.Invulnerable),
                 new XElement("stunned", m.Player2.Stunned),
+                new XElement("status", m.Player2.State),
+                new XElement("timer", m.Player2.Timer),
                 new XElement("fleft", m.Player2.FacinLeft))));
             Mock<IRepositoryHighScore> mockInstance1 = new Mock<IRepositoryHighScore>();
             mockInstance1.Setup(x => x.GetAll(It.IsAny<string>())).Returns(xd);
