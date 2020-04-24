@@ -86,10 +86,13 @@ namespace StreetFighter.WPFApp.Viewmodel
 
         private void NewGame(GameModel gm)
         {
+            gm.Player1 = new Player("name1", 100, 375, false);
+            gm.Player2 = new Player("name2", 1100, 375, true);
             PlayerNameWindow pw = new PlayerNameWindow
             {
                 DataContext = gm,
             };
+
             pw.ShowDialog();
             GameWindow gw = new GameWindow
             {
@@ -100,6 +103,7 @@ namespace StreetFighter.WPFApp.Viewmodel
 
         private void LoadGame(GameModel gm)
         {
+            gm.Modified = false;
             LoadGameWindow npw = new LoadGameWindow();
             npw.ShowDialog();
             if (gm.Modified)

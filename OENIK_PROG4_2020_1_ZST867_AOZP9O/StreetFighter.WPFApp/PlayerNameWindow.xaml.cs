@@ -1,4 +1,4 @@
-﻿// <copyright file="SaveGameWindow.xaml.cs" company="PlaceholderCompany">
+﻿// <copyright file="PlayerNameWindow.xaml.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 namespace StreetFighter.WPFApp

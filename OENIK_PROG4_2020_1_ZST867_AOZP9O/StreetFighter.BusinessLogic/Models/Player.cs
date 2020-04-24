@@ -103,12 +103,7 @@ namespace StreetFighter.BusinessLogic
         /// <param name="name">Name of the Player object.</param>
         /// <param name="positionX">X Position of the Player object.</param>
         /// <param name="positionY">Y Position of the Player object.</param>
-        /// <param name="Health">Health of the Player object.</param>
-        /// <param name="Stamina">Stamina of the Player object.</param>
-        /// <param name="Score">Score of the Player object.</param>
         /// <param name="facingLeft">Determines whether the Player object is facing left.</param>
-        /// <param name="Invulnerable">Determines whether the Player object is invulnerable.</param>
-        /// <param name="Stunned">Determines whether the Player object is stunned.</param>
         public Player(string name, int positionX, int positionY, bool facingLeft)
         {
             this.Name = name;
