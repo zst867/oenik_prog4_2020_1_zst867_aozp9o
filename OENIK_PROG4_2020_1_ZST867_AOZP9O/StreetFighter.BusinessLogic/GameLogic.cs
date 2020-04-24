@@ -111,7 +111,7 @@ namespace StreetFighter.BusinessLogic
         /// <param name="a">Player object.</param>
         public void MoveRight(Player a, Player b, GameModel model2)
         {
-            if ((a.FacinLeft || !a.IsHit(b)) && a.Geometry.Bounds.Right < model2.width - 5)
+            if ((a.FacinLeft || !a.IsHit(b)) && a.Geometry.Bounds.Right < model2.Width - 5)
             {
                 a.CX += 40;
                 RefreshScreen?.Invoke(this, EventArgs.Empty);
@@ -148,11 +148,11 @@ namespace StreetFighter.BusinessLogic
                 a.Timer = 1;
                 if (a.FacinLeft)
                 {
-                    a.Geometry = Player.facing_Left_Punch_Geometry;
+                    a.Geometry = Player.FacingLeftPunchGeometry;
                 }
                 else
                 {
-                    a.Geometry = Player.facing_Right_Punch_Geometry;
+                    a.Geometry = Player.FacingRightPunchGeometry;
                 }
 
                 if (a.IsHit(b) && !b.Invulnerable)
@@ -179,11 +179,11 @@ namespace StreetFighter.BusinessLogic
                 a.Timer = 1;
                 if (a.FacinLeft)
                 {
-                    a.Geometry = Player.facing_Left_Kick_Geometry;
+                    a.Geometry = Player.FacingLeftKickGeometry;
                 }
                 else
                 {
-                    a.Geometry = Player.facing_Right_Kick_Geometry;
+                    a.Geometry = Player.FacingRightKickGeometry;
                 }
 
                 if (a.IsHit(b) && !b.Invulnerable)
@@ -216,7 +216,7 @@ namespace StreetFighter.BusinessLogic
             {
                 model.Player1.CY -= model.Player1.DY;
                 model.Player1.DY -= 1;
-                if (model.Player1.Geometry.Bounds.Bottom == model.height-50)
+                if (model.Player1.Geometry.Bounds.Bottom == model.Height-50)
                 {
                     model.Player1.IsJumping = false;
                 }
@@ -226,7 +226,7 @@ namespace StreetFighter.BusinessLogic
             {
                 model.Player2.CY -= model.Player2.DY;
                 model.Player2.DY -= 1;
-                if (model.Player2.Geometry.Bounds.Bottom == model.height-50)
+                if (model.Player2.Geometry.Bounds.Bottom == model.Height-50)
                 {
                     model.Player2.IsJumping = false;
                 }
@@ -249,7 +249,7 @@ namespace StreetFighter.BusinessLogic
 
             if (model.Player1.Timer == 0)
             {
-                model.Player1.Geometry = model.Player1.FacinLeft ? Player.facing_Left_BaseGeometry : Player.facing_Right_BaseGeometry;
+                model.Player1.Geometry = model.Player1.FacinLeft ? Player.FacingLeftBaseGeometry : Player.FacingRightBaseGeometry;
                 model.Player1.State = PlayerStatus.IsStanding;
             }
             else
@@ -259,7 +259,7 @@ namespace StreetFighter.BusinessLogic
 
             if (model.Player2.Timer == 0)
             {
-                model.Player2.Geometry = model.Player2.FacinLeft ? Player.facing_Left_BaseGeometry : Player.facing_Right_BaseGeometry;
+                model.Player2.Geometry = model.Player2.FacinLeft ? Player.FacingLeftBaseGeometry : Player.FacingRightBaseGeometry;
                 model.Player2.State = PlayerStatus.IsStanding;
             }
             else

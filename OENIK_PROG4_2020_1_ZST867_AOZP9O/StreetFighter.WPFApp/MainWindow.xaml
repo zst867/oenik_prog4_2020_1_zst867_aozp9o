@@ -3,11 +3,45 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        
-        xmlns:local="clr-namespace:StreetFighter.WPFApp.IngameTools"
         mc:Ignorable="d"
-        Title="MainWindow" 
-        SizeToContent="WidthAndHeight">
-    <local:GameControl Width="1200" Height="650"></local:GameControl>
-    
+        Name="myMainWindow"
+        Title="MainWindow" Height="600" Width="800"
+        xmlns:local="clr-namespace:StreetFighter.WPFApp.Viewmodel">
+
+    <Window.Resources>
+        <local:MainMenuViewModel x:Key="my_viewmodel" />
+    </Window.Resources>
+
+    <Grid Name="MainGrid" DataContext="{StaticResource my_viewmodel}"  SizeChanged="MainGrid_SizeChanged">
+        <Grid.LayoutTransform>
+            <ScaleTransform x:Name="ApplicationScaleTransform"
+                        CenterX="0"
+                        CenterY="0"
+                        ScaleX="{Binding ElementName=myMainWindow, Path=ScaleValue}"
+                        ScaleY="{Binding ElementName=myMainWindow, Path=ScaleValue}" />
+        </Grid.LayoutTransform>
+        <Grid VerticalAlignment="Stretch" HorizontalAlignment="Left" Height="600" Width="800">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="3*" />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" Orientation="Vertical" Background="LightGray">
+                <Label Content="MAIN MENU" FontWeight="ExtraBold" Margin="10" Padding="5" Background="LightGray" HorizontalContentAlignment="Center" FontSize="20"></Label>
+                <Button Command="{Binding NewGameCommand}"
+                    Content="NEW GAME" FontWeight="ExtraBold" Margin="10" Padding="5" Background="White"/>
+                <Button Command="{Binding LoadGameCommand}"
+                    Content="LOAD GAME" FontWeight="ExtraBold" Margin="10" Padding="5" Background="White"/>
+                <Button Command="{Binding CreditsCommand}"
+                    Content="CREDITS" FontWeight="ExtraBold" Margin="10" Padding="5" Background="White"/>
+                <Button Command="{Binding HighScoreCommand}"
+                    Content="HIGHSCORE" FontWeight="ExtraBold" Margin="10" Padding="5" Background="White"/>
+                <Button Command="{Binding ExitGameCommand}"
+                    Content="EXIT GAME" FontWeight="ExtraBold" Margin="10" Padding="5" Background="White"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" Background="White">
+                <Image Source="https://hyperpix.net/wp-content/uploads/2019/08/street-fighter-logo-font-download-1200x900.jpg" Height="400" Margin="20,0,10,0"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
 </Window>

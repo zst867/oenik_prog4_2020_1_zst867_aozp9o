@@ -75,7 +75,7 @@ namespace StreetFighter.WPFApp.IngameTools
             BG.EndInit();
             ImageBrush ib = new ImageBrush(BG);
             Brush bgBrush = new ImageBrush(BG);
-            this.background = new GeometryDrawing(bgBrush, null, new RectangleGeometry(new Rect(0, 0, model.width, model.height)));
+            this.background = new GeometryDrawing(bgBrush, null, new RectangleGeometry(new Rect(0, 0, model.Width, model.Height)));
             FillTheDictionaries();
             ;
         }

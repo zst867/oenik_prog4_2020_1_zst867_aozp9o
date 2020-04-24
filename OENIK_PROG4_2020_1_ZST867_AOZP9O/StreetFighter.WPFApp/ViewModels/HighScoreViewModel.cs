@@ -1,28 +1,31 @@
-﻿// <copyright file="CreditViewModel.cs" company="PlaceholderCompany">
+﻿// <copyright file="HighScoreViewModel.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
-namespace StreetFighter.WPFApp.Viewmodels
+namespace StreetFighter.WPFApp.ViewmodelHS
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
-    using System.Windows;
     using System.Windows.Input;
     using GalaSoft.MvvmLight;
     using GalaSoft.MvvmLight.CommandWpf;
+    using StreetFighter.BusinessLogic;
 
     /// <summary>
-    /// ViewModel for credit window.
+    /// ViewModel for highscore window.
     /// </summary>
-    public class CreditViewModel : ViewModelBase
+    public class HighScoreViewModel : ViewModelBase
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="CreditViewModel"/> class.
+        /// Initializes a new instance of the <see cref="HighScoreViewModel"/> class.
         /// </summary>
-        public CreditViewModel()
+        public HighScoreViewModel()
         {
+            ILogicHighScore l = new LogicHighScore();
+            this.HSScore = l.CalculateHighscore("saved_games.txt").Score;
+            this.HSName = l.CalculateHighscore("saved_games.txt").Name;
             this.CloseCommand = new RelayCommand(() => this.Close());
         }
 
@@ -30,6 +33,16 @@ namespace StreetFighter.WPFApp.Viewmodels
         /// Gets CloseCommand.
         /// </summary>
         public ICommand CloseCommand { get; private set; }
+
+        /// <summary>
+        /// Gets or sets HSScore.
+        /// </summary>
+        public int HSScore { get; set; }
+
+        /// <summary>
+        /// Gets or sets HSName.
+        /// </summary>
+        public string HSName { get; set; }
 
         /// <summary>
         /// Gets or sets CloseAction.

@@ -1,4 +1,5 @@
 ﻿using StreetFighter.BusinessLogic;
+using StreetFighter.WPFApp.Viewmodel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace StreetFighter.WPFApp.IngameTools
     {
         GameLogic logic;
         GameRenderer renderer;
-        GameModel model;
+        GameModel model = MainMenuViewModel.Gm;
         DispatcherTimer jumpTimer;
         DispatcherTimer playerShapeAndStaminaTimer;
 
@@ -29,7 +30,6 @@ namespace StreetFighter.WPFApp.IngameTools
 
         private void GameControl_Loaded(object sender, RoutedEventArgs e)
         {
-            this.model = new GameModel();
             this.logic = new GameLogic(this.model);
             this.renderer = new GameRenderer(this.model);
 
@@ -83,7 +83,8 @@ namespace StreetFighter.WPFApp.IngameTools
                         }
                         break;
                     }
-                case Key.Space: logic.Block(model.Player1, 3); break;
+
+                // case Key.Space: logic.Block(model.Player1, 3); break;
                 case Key.Up: logic.MoveUp(model.Player2, model.Player1); break;
                 case Key.Left: logic.MoveLeft(model.Player2, model.Player1); break; break;
                 case Key.Right: logic.MoveRight(model.Player2, model.Player1, model); break; break;
@@ -112,7 +113,8 @@ namespace StreetFighter.WPFApp.IngameTools
                         }
                         break;
                     };
-                case Key.P: logic.Block(model.Player2, 3); break;
+
+                // case Key.P: logic.Block(model.Player2, 3); break;
                 case Key.Escape: {
                         Thread t = new Thread(() => {
                             SaveGameWindow pw = new SaveGameWindow();
