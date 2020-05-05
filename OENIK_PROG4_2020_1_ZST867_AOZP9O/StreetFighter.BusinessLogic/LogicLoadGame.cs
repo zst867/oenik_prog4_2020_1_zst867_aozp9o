@@ -101,7 +101,7 @@ namespace StreetFighter.BusinessLogic
                     Timer = int.Parse(node.Element("timer")?.Value),
                     FacinLeft = bool.Parse(node.Element("fleft")?.Value),
                     Geometry = bool.Parse(node.Element("fleft")?.Value) ? Player.FacingLeftBaseGeometry : Player.FacingRightBaseGeometry,
-        }).FirstOrDefault());
+                }).FirstOrDefault());
 
             return players;
         }
