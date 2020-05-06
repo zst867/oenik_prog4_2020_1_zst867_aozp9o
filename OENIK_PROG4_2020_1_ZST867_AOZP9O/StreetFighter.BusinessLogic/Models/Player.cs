@@ -51,6 +51,10 @@ namespace StreetFighter.BusinessLogic
         /// </summary>
         private Geometry geometry;
 
+        /// <summary>
+        /// Initializes static members of the <see cref="Player"/> class.
+        /// Sets the geometries.
+        /// </summary>
         static Player()
         {
             FacingRightBaseGeometry = new RectangleGeometry(new Rect(0, 0, 75, 225))
@@ -279,6 +283,10 @@ namespace StreetFighter.BusinessLogic
                 null).GetArea() > 0;
         }
 
+        /// <summary>
+        /// Invokes the PropertyChanged event.
+        /// </summary>
+        /// <param name="propertyName">Name of the property in string.</param>
         private void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

@@ -16,18 +16,31 @@ namespace StreetFighter.BusinessLogic
     /// </summary>
     public class GameLogic : IGameLogic
     {
-        public event EventHandler RefreshScreen;
+        /// <summary>
+        /// GameModel field.
+        /// </summary>
+        private GameModel model;
 
-        GameModel model;
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GameLogic"/> class.
+        /// </summary>
+        /// <param name="model">GameModel.</param>
         public GameLogic(GameModel model)
         {
             this.model = model;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GameLogic"/> class.
+        /// </summary>
         public GameLogic()
         {
         }
+
+        /// <summary>
+        /// RefreshScreen event.
+        /// </summary>
+        public event EventHandler RefreshScreen;
 
         /// <summary>
         /// Blocking logic.
@@ -40,7 +53,7 @@ namespace StreetFighter.BusinessLogic
             if (this.EnoughStamina(a, staminacost * 2 ^ counter))
             {
                 a.Invulnerable = true;
-                RefreshScreen?.Invoke(this, EventArgs.Empty);
+                this.RefreshScreen?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -62,23 +75,6 @@ namespace StreetFighter.BusinessLogic
         /// <param name="b">Other Player.</param>
         public void JumpLogic(Player a, Player b)
         {
-            //if (a.CX<b.CX)
-            //{
-            //    a.FacinLeft =
-            //}
-            //if ((a.FacinLeft == true) && (a.CX < b.CX))
-            //{
-            //    a.FacinLeft = false;
-            //    b.FacinLeft = true;
-            //    //RefreshScreen?.Invoke(this, EventArgs.Empty);
-            //}
-
-            //if ((a.FacinLeft == false) && (a.CX > b.CX))
-            //{
-            //    a.FacinLeft = true;
-            //    b.FacinLeft = false;
-            //    //RefreshScreen?.Invoke(this, EventArgs.Empty);
-            //}
         }
 
         /// <summary>
@@ -98,7 +94,7 @@ namespace StreetFighter.BusinessLogic
         /// <param name="a">Player object.</param>
         public void MoveLeft(Player a, Player b)
         {
-            if ((!a.FacinLeft || !a.IsHit(b)) &&  a.Geometry.Bounds.Left > 8)
+            if ((!a.FacinLeft || !a.IsHit(b)) && a.Geometry.Bounds.Left > 8)
             {
                 a.CX -= 40;
                 RefreshScreen?.Invoke(this, EventArgs.Empty);

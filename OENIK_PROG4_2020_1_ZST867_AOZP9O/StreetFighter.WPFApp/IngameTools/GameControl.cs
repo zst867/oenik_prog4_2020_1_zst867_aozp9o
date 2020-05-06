@@ -1,33 +1,60 @@
-﻿using StreetFighter.BusinessLogic;
-using StreetFighter.WPFApp.Viewmodel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Forms;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Threading;
-using MessageBox = System.Windows.Forms.MessageBox;
+﻿// <copyright file="GameControl.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace StreetFighter.WPFApp.IngameTools
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using System.Windows;
+    using System.Windows.Forms;
+    using System.Windows.Input;
+    using System.Windows.Media;
+    using System.Windows.Threading;
+    using StreetFighter.BusinessLogic;
+    using StreetFighter.WPFApp.Viewmodel;
+    using MessageBox = System.Windows.Forms.MessageBox;
+
+    /// <summary>
+    /// GameControl class.
+    /// </summary>
     public class GameControl : FrameworkElement
     {
-        GameLogic logic;
-        GameRenderer renderer;
-        GameModel model = MainMenuViewModel.Gm;
-        DispatcherTimer jumpTimer;
-        DispatcherTimer playerShapeAndStaminaTimer;
+        private GameLogic logic;
+        private GameRenderer renderer;
+        private GameModel model = MainMenuViewModel.Gm;
+        private DispatcherTimer jumpTimer;
+        private DispatcherTimer playerShapeAndStaminaTimer;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GameControl"/> class.
+        /// </summary>
         public GameControl()
         {
-            Loaded += GameControl_Loaded;
+            this.Loaded += this.GameControl_Loaded;
         }
 
+        /// <summary>
+        /// Called on rendering.
+        /// </summary>
+        /// <param name="drawingContext">Drawing context.</param>
+        protected override void OnRender(DrawingContext drawingContext)
+        {
+            if (this.renderer != null)
+            {
+                this.renderer.DrawThings(drawingContext);
+            }
+        }
+
+        /// <summary>
+        /// Initializes the components and subscribe on events.
+        /// </summary>
+        /// <param name="sender">Event sender object.</param>
+        /// <param name="e">Event arguments.</param>
         private void GameControl_Loaded(object sender, RoutedEventArgs e)
         {
             this.logic = new GameLogic(this.model);
@@ -38,92 +65,101 @@ namespace StreetFighter.WPFApp.IngameTools
             {
                 this.jumpTimer = new DispatcherTimer();
                 this.jumpTimer.Interval = TimeSpan.FromMilliseconds(25);
-                this.jumpTimer.Tick += this.jumpTick;
+                this.jumpTimer.Tick += this.JumpTick;
                 this.playerShapeAndStaminaTimer = new DispatcherTimer();
                 this.playerShapeAndStaminaTimer.Interval = TimeSpan.FromMilliseconds(200);
-                this.playerShapeAndStaminaTimer.Tick += this.shapeTick;
+                this.playerShapeAndStaminaTimer.Tick += this.ShapeTick;
                 win.KeyDown += this.Win_KeyDown;
                 this.jumpTimer.Start();
                 this.playerShapeAndStaminaTimer.Start();
             }
 
-            logic.RefreshScreen += (obj, args) => InvalidateVisual();
-            InvalidateVisual();
+            this.logic.RefreshScreen += (obj, args) => this.InvalidateVisual();
+            this.InvalidateVisual();
         }
 
         private void Win_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
             switch (e.Key)
             {
-                case Key.W: logic.MoveUp(model.Player1, model.Player2); break;
-                case Key.A: logic.MoveLeft(model.Player1, model.Player2); break;
-                case Key.D: logic.MoveRight(model.Player1, model.Player2, model); break;
-                case Key.Q: 
+                case Key.W: this.logic.MoveUp(this.model.Player1, this.model.Player2); break;
+                case Key.A: this.logic.MoveLeft(this.model.Player1, this.model.Player2); break;
+                case Key.D: this.logic.MoveRight(this.model.Player1, this.model.Player2, this.model); break;
+                case Key.Q:
                     {
-                        logic.Kick(model.Player1, model.Player2);
-                        if (model.Player2.Health <= 0)
+                        this.logic.Kick(this.model.Player1, this.model.Player2);
+                        if (this.model.Player2.Health <= 0)
                         {
                             ILogicSaveGame l = new LogicSaveGame();
-                            l.Write("autosave", model.Player1, model.Player2, "saved_games.txt");
-                            MessageBox.Show(model.Player1.Name + " won");
+                            l.Write("autosave", this.model.Player1, this.model.Player2, "saved_games.txt");
+                            MessageBox.Show(this.model.Player1.Name + " won");
+                            Window.GetWindow(this).Close();
                             break;
                         }
-                        break;
-                    } 
-                case Key.E:
-                    {
-                        logic.Slap(model.Player1, model.Player2);
-                        
-                        if (model.Player2.Health <= 0)
-                        {
-                            ILogicSaveGame l = new LogicSaveGame();
-                            l.Write("autosave", model.Player1, model.Player2, "saved_games.txt");
-                            MessageBox.Show(model.Player1.Name + " won");
-                            break;
-                        }
+
                         break;
                     }
 
-                // case Key.Space: logic.Block(model.Player1, 3); break;
-                case Key.Up: logic.MoveUp(model.Player2, model.Player1); break;
-                case Key.Left: logic.MoveLeft(model.Player2, model.Player1); break; break;
-                case Key.Right: logic.MoveRight(model.Player2, model.Player1, model); break; break;
+                case Key.E:
+                    {
+                        this.logic.Slap(this.model.Player1, this.model.Player2);
+                        if (this.model.Player2.Health <= 0)
+                        {
+                            ILogicSaveGame l = new LogicSaveGame();
+                            l.Write("autosave", this.model.Player1, this.model.Player2, "saved_games.txt");
+                            MessageBox.Show(this.model.Player1.Name + " won");
+                            Window.GetWindow(this).Close();
+                            break;
+                        }
+
+                        break;
+                    }
+
+                case Key.Up: this.logic.MoveUp(this.model.Player2, this.model.Player1); break;
+                case Key.Left: this.logic.MoveLeft(this.model.Player2, this.model.Player1); break;
+                case Key.Right: this.logic.MoveRight(this.model.Player2, this.model.Player1, this.model); break;
                 case Key.I:
                     {
-                        logic.Kick(model.Player2, model.Player1);
-                        if (model.Player1.Health <= 0)
+                        this.logic.Kick(this.model.Player2, this.model.Player1);
+                        if (this.model.Player1.Health <= 0)
                         {
                             ILogicSaveGame l = new LogicSaveGame();
-                            l.Write("autosave", model.Player1, model.Player2, "saved_games.txt");
-                            MessageBox.Show(model.Player2.Name + " won");
+                            l.Write("autosave", this.model.Player1, this.model.Player2, "saved_games.txt");
+                            MessageBox.Show(this.model.Player2.Name + " won");
+                            Window.GetWindow(this).Close();
                             break;
                         }
+
                         break;
-                    };
+                    }
+
                 case Key.O:
                     {
-                        logic.Slap(model.Player2, model.Player1);
+                        this.logic.Slap(this.model.Player2, this.model.Player1);
 
-                        if (model.Player1.Health <= 0)
+                        if (this.model.Player1.Health <= 0)
                         {
                             ILogicSaveGame l = new LogicSaveGame();
-                            l.Write("autosave", model.Player1, model.Player2, "saved_games.txt");
-                            MessageBox.Show(model.Player2.Name + " won");
+                            l.Write("autosave", this.model.Player1, this.model.Player2, "saved_games.txt");
+                            MessageBox.Show(this.model.Player2.Name + " won");
+                            Window.GetWindow(this).Close();
                             break;
                         }
-                        break;
-                    };
 
-                // case Key.P: logic.Block(model.Player2, 3); break;
-                case Key.Escape: {
-                        Thread t = new Thread(() => {
+                        break;
+                    }
+
+                case Key.Escape:
+                    {
+                        Thread t = new Thread(() =>
+                        {
                             SaveGameWindow pw = new SaveGameWindow();
                             SavedGame sg = new SavedGame();
                             pw.DataContext = sg;
                             if ((pw.ShowDialog() == true) && (sg.Name != string.Empty))
                             {
                                 ILogicSaveGame l = new LogicSaveGame();
-                                l.Write(sg.Name, model.Player1, model.Player2, "saved_games.txt");
+                                l.Write(sg.Name, this.model.Player1, this.model.Player2, "saved_games.txt");
                                 MessageBox.Show("game saved");
                             }
                         });
@@ -133,29 +169,32 @@ namespace StreetFighter.WPFApp.IngameTools
                         {
                             Thread.Sleep(10);
                         }
+
                         break;
-                }
+                    }
             }
         }
 
-        private void shapeTick(object sender, EventArgs e)
+        /// <summary>
+        /// Called on a Shapetimer tick.
+        /// </summary>
+        /// <param name="sender">Sender objec.</param>
+        /// <param name="e">Event argument.</param>
+        private void ShapeTick(object sender, EventArgs e)
         {
-            logic.ShapeAndStaminaTick();
-            InvalidateVisual();
+            this.logic.ShapeAndStaminaTick();
+            this.InvalidateVisual();
         }
 
-        private void jumpTick(object sender, EventArgs e)
+        /// <summary>
+        /// Called on a Jumptimer tick.
+        /// </summary>
+        /// <param name="sender">Sender objec.</param>
+        /// <param name="e">Event argument.</param>
+        private void JumpTick(object sender, EventArgs e)
         {
-            logic.JumpTick();
-            InvalidateVisual();
-        }
-
-        protected override void OnRender(DrawingContext drawingContext)
-        {
-            if (this.renderer != null)
-            {
-                this.renderer.DrawThings(drawingContext);
-            }
+            this.logic.JumpTick();
+            this.InvalidateVisual();
         }
     }
 }
