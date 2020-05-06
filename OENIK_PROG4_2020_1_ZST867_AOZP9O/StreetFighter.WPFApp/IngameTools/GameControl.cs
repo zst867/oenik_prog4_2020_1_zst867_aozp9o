@@ -93,6 +93,7 @@ namespace StreetFighter.WPFApp.IngameTools
                             ILogicSaveGame l = new LogicSaveGame();
                             l.Write("autosave", this.model.Player1, this.model.Player2, "saved_games.txt");
                             MessageBox.Show(this.model.Player1.Name + " won");
+                            Window.GetWindow(this).Close();
                             break;
                         }
 
@@ -107,6 +108,7 @@ namespace StreetFighter.WPFApp.IngameTools
                             ILogicSaveGame l = new LogicSaveGame();
                             l.Write("autosave", this.model.Player1, this.model.Player2, "saved_games.txt");
                             MessageBox.Show(this.model.Player1.Name + " won");
+                            Window.GetWindow(this).Close();
                             break;
                         }
 
@@ -124,6 +126,7 @@ namespace StreetFighter.WPFApp.IngameTools
                             ILogicSaveGame l = new LogicSaveGame();
                             l.Write("autosave", this.model.Player1, this.model.Player2, "saved_games.txt");
                             MessageBox.Show(this.model.Player2.Name + " won");
+                            Window.GetWindow(this).Close();
                             break;
                         }
 
@@ -139,6 +142,7 @@ namespace StreetFighter.WPFApp.IngameTools
                             ILogicSaveGame l = new LogicSaveGame();
                             l.Write("autosave", this.model.Player1, this.model.Player2, "saved_games.txt");
                             MessageBox.Show(this.model.Player2.Name + " won");
+                            Window.GetWindow(this).Close();
                             break;
                         }
 
