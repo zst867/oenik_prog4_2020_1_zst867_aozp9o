@@ -84,7 +84,7 @@ namespace StreetFighter.WPFApp.IngameTools
             {
                 case Key.W: this.logic.MoveUp(this.model.Player1, this.model.Player2); break;
                 case Key.A: this.logic.MoveLeft(this.model.Player1, this.model.Player2); break;
-                case Key.D: this.logic.MoveRight(this.model.Player1, this.model.Player2, this.model); break;
+                case Key.D: this.logic.MoveRight(this.model.Player1, this.model.Player2); break;
                 case Key.Q:
                     {
                         this.logic.Kick(this.model.Player1, this.model.Player2);
@@ -117,7 +117,7 @@ namespace StreetFighter.WPFApp.IngameTools
 
                 case Key.Up: this.logic.MoveUp(this.model.Player2, this.model.Player1); break;
                 case Key.Left: this.logic.MoveLeft(this.model.Player2, this.model.Player1); break;
-                case Key.Right: this.logic.MoveRight(this.model.Player2, this.model.Player1, this.model); break;
+                case Key.Right: this.logic.MoveRight(this.model.Player2, this.model.Player1); break;
                 case Key.I:
                     {
                         this.logic.Kick(this.model.Player2, this.model.Player1);

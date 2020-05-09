@@ -43,7 +43,7 @@ namespace StreetFighter.Tests
             GameModel m = new GameModel();
             IGameLogic logic = new GameLogic();
 
-            logic.MoveRight(m.Player1, m.Player2, m);
+            logic.MoveRight(m.Player1, m.Player2);
 
             Assert.AreEqual(m.Player1.CX, 140);
         }

@@ -91,26 +91,28 @@ namespace StreetFighter.BusinessLogic
         /// <summary>
         /// Moves Player left.
         /// </summary>
-        /// <param name="a">Player object.</param>
+        /// <param name="a">First Player object.</param>
+        /// <param name="b">Second Player object.</param>
         public void MoveLeft(Player a, Player b)
         {
             if ((!a.FacinLeft || !a.IsHit(b)) && a.Geometry.Bounds.Left > 8)
             {
                 a.CX -= 40;
-                RefreshScreen?.Invoke(this, EventArgs.Empty);
+                this.RefreshScreen?.Invoke(this, EventArgs.Empty);
             }
         }
 
         /// <summary>
         /// Moves Player right.
         /// </summary>
-        /// <param name="a">Player object.</param>
-        public void MoveRight(Player a, Player b, GameModel  model2)
+        /// <param name="a">First Player object.</param>
+        /// <param name="b">Second Player object.</param>
+        public void MoveRight(Player a, Player b)
         {
-            if ((a.FacinLeft || !a.IsHit(b)) && a.Geometry.Bounds.Right < model2.Width - 5)
+            if ((a.FacinLeft || !a.IsHit(b)) && a.Geometry.Bounds.Right < this.model.Width - 5)
             {
                 a.CX += 40;
-                RefreshScreen?.Invoke(this, EventArgs.Empty);
+                this.RefreshScreen?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -126,7 +128,8 @@ namespace StreetFighter.BusinessLogic
                 a.DY = 25;
                 a.IsJumping = true;
                 this.JumpLogic(a, b);
-                //RefreshScreen?.Invoke(this, EventArgs.Empty);
+
+                // RefreshScreen?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -137,7 +140,6 @@ namespace StreetFighter.BusinessLogic
         /// <param name="b">Player attacked.</param>
         public void Slap(Player a, Player b)
         {
-
             if (a.Stamina >= 30)
             {
                 a.State = PlayerStatus.IsPunching;
@@ -158,7 +160,7 @@ namespace StreetFighter.BusinessLogic
                 }
 
                 a.Stamina -= 30;
-                RefreshScreen?.Invoke(this, EventArgs.Empty);
+                this.RefreshScreen?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -190,79 +192,89 @@ namespace StreetFighter.BusinessLogic
 
                 a.Stamina -= 50;
 
-                RefreshScreen?.Invoke(this, EventArgs.Empty);
+                this.RefreshScreen?.Invoke(this, EventArgs.Empty);
             }
         }
 
+        /// <summary>
+        /// Stamina regen.
+        /// </summary>
         public void StaminaRegen()
         {
-            if (model.Player1.Stamina < 100)
+            if (this.model.Player1.Stamina < 100)
             {
-                model.Player1.Stamina+=5;
+                this.model.Player1.Stamina += 5;
             }
-            if (model.Player2.Stamina < 100)
+
+            if (this.model.Player2.Stamina < 100)
             {
-                model.Player2.Stamina+=5;
+                this.model.Player2.Stamina += 5;
             }
         }
 
+        /// <summary>
+        /// Jumpstick.
+        /// </summary>
         public void JumpTick()
         {
-            if (model.Player1.IsJumping)
+            if (this.model.Player1.IsJumping)
             {
-                model.Player1.CY -= model.Player1.DY;
-                model.Player1.DY -= 1;
-                if (model.Player1.Geometry.Bounds.Bottom == model.Height-50)
+                this.model.Player1.CY -= this.model.Player1.DY;
+                this.model.Player1.DY -= 1;
+                if (this.model.Player1.Geometry.Bounds.Bottom == this.model.Height - 50)
                 {
-                    model.Player1.IsJumping = false;
+                    this.model.Player1.IsJumping = false;
                 }
             }
 
-            if (model.Player2.IsJumping)
+            if (this.model.Player2.IsJumping)
             {
-                model.Player2.CY -= model.Player2.DY;
-                model.Player2.DY -= 1;
-                if (model.Player2.Geometry.Bounds.Bottom == model.Height-50)
+                this.model.Player2.CY -= this.model.Player2.DY;
+                this.model.Player2.DY -= 1;
+                if (this.model.Player2.Geometry.Bounds.Bottom == this.model.Height - 50)
                 {
-                    model.Player2.IsJumping = false;
+                    this.model.Player2.IsJumping = false;
                 }
             }
         }
 
+        /// <summary>
+        /// Jumpstick.
+        /// </summary>
         public void ShapeAndStaminaTick()
         {
-            if (model.Player1.CX < model.Player2.CX)
+            if (this.model.Player1.CX < this.model.Player2.CX)
             {
-                model.Player1.FacinLeft = false;
-                model.Player2.FacinLeft = true;
+                this.model.Player1.FacinLeft = false;
+                this.model.Player2.FacinLeft = true;
+            }
+            else if (this.model.Player1.CX > this.model.Player2.CX)
+            {
+                this.model.Player1.FacinLeft = true;
+                this.model.Player2.FacinLeft = false;
             }
 
-            else if (model.Player1.CX > model.Player2.CX)
+            if (this.model.Player1.Timer == 0)
             {
-                model.Player1.FacinLeft = true;
-                model.Player2.FacinLeft = false;
-            }
-
-            if (model.Player1.Timer == 0)
-            {
-                model.Player1.Geometry = model.Player1.FacinLeft ? Player.FacingLeftBaseGeometry : Player.FacingRightBaseGeometry;
-                model.Player1.State = PlayerStatus.IsStanding;
+                this.model.Player1.Geometry = this.model.Player1.FacinLeft ? Player.FacingLeftBaseGeometry : Player.FacingRightBaseGeometry;
+                this.model.Player1.State = PlayerStatus.IsStanding;
             }
             else
             {
-                model.Player1.Timer--;
+                this.model.Player1.Timer--;
             }
 
-            if (model.Player2.Timer == 0)
+            if (this.model.Player2.Timer == 0)
             {
-                model.Player2.Geometry = model.Player2.FacinLeft ? Player.FacingLeftBaseGeometry : Player.FacingRightBaseGeometry;
-                model.Player2.State = PlayerStatus.IsStanding;
+                this.model.Player2.Geometry = this.model.Player2.FacinLeft ? Player.FacingLeftBaseGeometry : Player.FacingRightBaseGeometry;
+                this.model.Player2.State = PlayerStatus.IsStanding;
             }
             else
             {
-                model.Player2.Timer--;
+                this.model.Player2.Timer--;
             }
-            StaminaRegen();
+
+            this.StaminaRegen();
         }
     }
 }
