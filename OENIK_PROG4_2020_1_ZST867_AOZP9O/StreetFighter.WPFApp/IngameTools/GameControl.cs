@@ -24,9 +24,9 @@ namespace StreetFighter.WPFApp.IngameTools
     /// </summary>
     public class GameControl : FrameworkElement
     {
+        private readonly GameModel model = MainMenuViewModel.Gm;
         private GameLogic logic;
         private GameRenderer renderer;
-        private GameModel model = MainMenuViewModel.Gm;
         private DispatcherTimer jumpTimer;
         private DispatcherTimer playerShapeAndStaminaTimer;
 
@@ -63,11 +63,15 @@ namespace StreetFighter.WPFApp.IngameTools
             Window win = Window.GetWindow(this);
             if (win != null)
             {
-                this.jumpTimer = new DispatcherTimer();
-                this.jumpTimer.Interval = TimeSpan.FromMilliseconds(25);
+                this.jumpTimer = new DispatcherTimer
+                {
+                    Interval = TimeSpan.FromMilliseconds(25),
+                };
                 this.jumpTimer.Tick += this.JumpTick;
-                this.playerShapeAndStaminaTimer = new DispatcherTimer();
-                this.playerShapeAndStaminaTimer.Interval = TimeSpan.FromMilliseconds(200);
+                this.playerShapeAndStaminaTimer = new DispatcherTimer
+                {
+                    Interval = TimeSpan.FromMilliseconds(200),
+                };
                 this.playerShapeAndStaminaTimer.Tick += this.ShapeTick;
                 win.KeyDown += this.Win_KeyDown;
                 this.jumpTimer.Start();
