@@ -42,7 +42,7 @@ namespace StreetFighter.WPFApp.IngameTools
         /// <summary>
         /// Initializes a new instance of the <see cref="GameRenderer"/> class.
         /// </summary>
-        /// <param name="model">GameModel.</param>
+        /// <param name="model">GameModel (the model of the game).</param>
         public GameRenderer(GameModel model)
         {
             this.model = model;
