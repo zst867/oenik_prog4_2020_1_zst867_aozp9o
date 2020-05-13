@@ -20,22 +20,22 @@ namespace StreetFighter.WPFApp.IngameTools
     /// </summary>
     public class GameRenderer
     {
-        private GameModel model;
+        private readonly GameModel model;
 
         // Pen blackPen = new Pen(Brushes.Black, 2);
-        private Pen redPen = new Pen(Brushes.Red, 2);
-        private Pen bluePen = new Pen(Brushes.DarkBlue, 2);
-        private Pen yellowPen = new Pen(Brushes.Yellow, 2);
-        private Pen greenPen = new Pen(Brushes.GreenYellow, 2);
+        private readonly GeometryDrawing background;
+        private readonly Typeface font = new Typeface("Arial");
+        private readonly Pen redPen = new Pen(Brushes.Red, 2);
+        private readonly Pen bluePen = new Pen(Brushes.DarkBlue, 2);
+        private readonly Pen yellowPen = new Pen(Brushes.Yellow, 2);
+        private readonly Pen greenPen = new Pen(Brushes.GreenYellow, 2);
         private Point player1HealthLocation = new Point(270, 20);
         private Point player2HealthLocation = new Point(800, 20);
         private Point player1StaminaLocation = new Point(270, 50);
         private Point player2StaminaLocation = new Point(800, 50);
         private Point player1ScoreLocation = new Point(270, 75);
         private Point player2ScoreLocation = new Point(800, 75);
-        private Typeface font = new Typeface("Arial");
 
-        private GeometryDrawing background;
         private Dictionary<string, ImageBrush> player1Brushes;
         private Dictionary<string, ImageBrush> player2Brushes;
 
